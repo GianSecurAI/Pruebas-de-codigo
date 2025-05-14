@@ -1,0 +1,44 @@
+.productos-estrella {
+  background: #ffffff;
+}
+
+#banner-principal {
+  margin-top: 100px; 
+}
+
+/* Estilos para los títulos de sección como "CATEGORÍAS" y "NUESTROS PRODUCTOS ESTRELLA" */
+.section-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px; /* Espacio considerable arriba del título */
+  margin-bottom: 40px; /* Espacio considerable abajo del título */
+  padding: 0 15px; /* Padding lateral para evitar que las líneas toquen los bordes en pantallas pequeñas */
+}
+
+.section-title-container::before,
+.section-title-container::after {
+  content: '';
+  flex-grow: 1; /* Permite que las líneas ocupen el espacio disponible */
+  height: 1px; /* Grosor de la línea */
+  background-color: #9d705d; /* Un tono marrón/terracota, similar a la imagen */
+  margin: 0 20px; /* Espacio entre la línea y el texto del título */
+}
+
+.section-title {
+  font-size: 1.6em; /* Tamaño del texto del título, ajústalo si es necesario */
+  color: #9d705d; /* Mismo color que las líneas para consistencia */
+  text-transform: uppercase; /* Para que el texto esté en mayúsculas */
+  white-space: nowrap; /* Evita que el título se parta en varias líneas */
+  font-weight: 500; /* Un peso de fuente medio */
+  letter-spacing: 1px; /* Un ligero espaciado entre letras */
+}
+
+/* Contenedor principal de la página Home */
+.home-container {
+  /* Si tu Navbar es fija y está cubriendo parte del contenido superior, 
+     podrías necesitar añadir un padding-top aquí.
+     Ejemplo: padding-top: 100px; 
+     Actualmente, parece que #banner-principal en tu Home.css ya tiene un margin-top,
+     lo que podría estar resolviendo esto. Verifica si es necesario. */
+}

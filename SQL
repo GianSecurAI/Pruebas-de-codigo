@@ -1,0 +1,12 @@
+/* Datos Dinámicos:
+
+Si los productos provienen de una API o base de datos, puedes mapearlos dinámicamente en lugar de escribirlos manualmente. Por ejemplo:
+
+const products = [
+  { image: '/img/prod-frag2.png', title: 'Cielo en Rosa Eau de Parfum', price: 'S/ 113.00', link: 'producto-cieloenrosa.html' },
+  { image: '/img/prod-frag1.png', title: 'Set Ccori Rosé: Parfum + Loción Perfumada', price: 'S/ 119.00', link: '#' },
+];
+
+{products.map((product, index) => (
+  <ProductCard key={index} {...product} />
+))} */

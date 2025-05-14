@@ -1,0 +1,38 @@
+.footer {
+  background: #f8f3f7;
+  border-top: 1px solid #975e7f;
+  padding-top: 35px;
+}
+
+.footer-logo img {
+  height: 200px;
+}
+
+.footer h6 {
+  color: #a05b8e;
+}
+
+.footer a {
+  color: #7d3c6e;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-contact {
+  color: #7d3c6e;
+}
+
+.footer-social-icons a {
+  color: #a05b8e;
+  margin-left: 15px;
+}
+
+.footer-social-icons a:first-child {
+  margin-left: 0;
+}
+
+.footer-copyright {
+  color: #a05b8e;
+}

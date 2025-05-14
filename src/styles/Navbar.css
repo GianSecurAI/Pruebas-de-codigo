@@ -1,0 +1,12 @@
+.navbar-link {
+  color: #333;
+}
+
+.navbar-link:hover {
+  color: #555;
+}
+
+.navbar-brand img {
+  max-height: 40px; /* Ajusta este valor según sea necesario */
+  width: auto; /* Mantiene la proporción de la imagen */
+}

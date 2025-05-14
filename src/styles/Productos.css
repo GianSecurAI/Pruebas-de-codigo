@@ -1,0 +1,11 @@
+/* src/styles/Productos.css */
+.productos-header .categorias-principales .categoria-link {
+  color: #8c438c; /* Tono morado/magenta similar a la imagen */
+  margin-left: 10px; /* Espacio a la izquierda de cada enlace */
+  margin-right: 10px; /* Espacio a la derecha de cada enlace */
+  text-decoration: none; /* Quitar subrayado por defecto si lo hubiera */
+}
+
+.productos-header .categorias-principales .categoria-link:hover {
+  text-decoration: underline; /* Subrayar al pasar el mouse, opcional */
+}

@@ -1,0 +1,49 @@
+/* src/styles/ProductMenu.css */
+.menu-perfumes {
+  background-color: #fceef5; /* Rosa muy pálido */
+  padding: 20px;
+  border-radius: 4px; /* Opcional: para bordes ligeramente redondeados */
+}
+
+.menu-perfumes h5 {
+  color: #6a0042; /* Morado oscuro/fucsia */
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-bottom: 2px solid #6a0042;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.menu-perfumes .nav-link {
+  padding: 0.3rem 0; /* Ajuste de padding vertical */
+  color: #6a0042; /* Color por defecto para links, se sobreescribirá */
+  text-decoration: none;
+}
+
+.menu-perfumes .nav-link:hover {
+  color: #D91A7B; /* Rosa más brillante para el hover */
+}
+
+.menu-perfumes .category-title {
+  font-weight: bold;
+  color: #6a0042; /* Morado oscuro/fucsia */
+  margin-top: 0.5rem;
+}
+
+
+
+.menu-perfumes .sub-category {
+  color: #333333; /* Gris oscuro */
+  font-size: 0.9rem;
+  padding-left: 25px; /* Indentación para el ícono y texto */
+  position: relative;
+}
+
+.menu-perfumes .sub-category::before {
+  position: absolute;
+  left: 10px; /* Posición del ícono cuadrado */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8em; /* Ajustar tamaño del cuadrado si es necesario */
+}

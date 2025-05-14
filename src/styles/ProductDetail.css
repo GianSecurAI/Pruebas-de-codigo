@@ -1,0 +1,97 @@
+.volver-atras {
+  color: #D91A7B; /* Tono rosa/fucsia más vibrante */
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 20px; /* Espacio antes del contenido principal */
+}
+
+.volver-atras:hover {
+  text-decoration: underline;
+}
+
+.producto-detalle-img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #eee; /* Borde sutil como en la imagen */
+}
+
+/* Estilos para la columna de detalles del producto */
+.col-md-7 .detalle-titulo {
+  font-size: 1.75rem; /* Más grande */
+  font-weight: 600; /* Más bold */
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.col-md-7 .detalle-volumen {
+  font-size: 0.9rem;
+  color: #6c757d; /* Gris para el volumen */
+  margin-bottom: 0.75rem;
+}
+
+.col-md-7 .detalle-precio {
+  font-size: 1.5rem; /* Más grande */
+  color: #D91A7B; /* Tono rosa/fucsia */
+  font-weight: 700; /* Bold */
+  margin-bottom: 1.5rem;
+}
+
+/* Control de cantidad */
+.col-md-7 .form-label {
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.col-md-7 .input-group {
+  margin-bottom: 1.5rem; /* Espacio antes del botón de agregar */
+}
+
+.cantidad-input {
+  text-align: center;
+  font-weight: 500;
+}
+
+.btn-cantidad {
+  background-color: #D91A7B; /* Tono rosa/fucsia */
+  color: white;
+  border: none;
+  min-width: 38px; /* Asegurar que los botones +/- tengan buen tamaño */
+}
+
+.btn-cantidad:hover {
+  background-color: #b81568; /* Un tono más oscuro para el hover */
+}
+
+.btn-agregar {
+  background-color: #D91A7B; /* Tono rosa/fucsia */
+  color: white;
+  border: none;
+  padding: 0.9rem 2.2rem; /* Ajustado para mayor altura y ancho adecuado */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block; /* Asegura el comportamiento de bloque en línea */
+}
+
+.btn-agregar:hover {
+  background-color: #b81568; /* Un tono más oscuro para el hover */
+}
+
+/* Secciones de descripción e ingredientes */
+.col-md-7 h6 {
+  font-weight: 700; /* Bold para los títulos de sección */
+  margin-top: 1.5rem; /* Espacio arriba de "¿Qué es?" e "Ingredientes" */
+  margin-bottom: 0.75rem;
+}
+
+.col-md-7 .detalle-descripcion,
+.col-md-7 .detalle-ingredientes p {
+  font-size: 0.95rem;
+  color: #495057;
+  line-height: 1.6;
+}
+
+.col-md-7 .detalle-ingredientes b {
+  color: #343a40;
+}

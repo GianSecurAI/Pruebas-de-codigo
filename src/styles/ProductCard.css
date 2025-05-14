@@ -1,0 +1,24 @@
+.product-card {
+  background: #fff;
+}
+
+.product-card img {
+  width: 220px;
+}
+
+.product-card-name {
+  font-size: 1.1rem;
+}
+
+.product-card-price {
+  color: #a05b8e;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.product-card-btn {
+  background: #a05b8e;
+  color: #fff;
+  border: none;
+  margin-top: 0.5rem;
+}
