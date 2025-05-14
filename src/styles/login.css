@@ -1,0 +1,149 @@
+/* filepath: /workspaces/Pruebas-de-codigo/src/styles/login.css */.login-page-container {
+  min-height: 100vh;
+  background: #f7f8fa;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 0 60px 0;
+  flex: 1;
+}
+
+.login-form-container,
+.register-form-container {
+  background: #fff;
+  padding: 40px 32px 32px 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
+  width: 420px;
+  max-width: 95vw;
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  transition: box-shadow 0.2s;
+}
+
+.login-form-container:hover,
+.register-form-container:hover {
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.13);
+}
+
+  
+h2 {
+  text-align: center;
+  margin-bottom: 28px;
+  color: #222;
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  color: #444;
+  font-weight: 500;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"],
+.form-group input[type="tel"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 7px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background: #f7f8fa;
+  transition: border 0.2s;
+}
+
+.form-group input:focus {
+  border: 1.5px solid #5cb85c;
+  outline: none;
+  background: #fff;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.btn-submit {
+  background: linear-gradient(90deg, #5cb85c 60%, #4cae4c 100%);
+  color: #fff;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 1.08rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px 0 rgba(92,184,92,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn-submit:hover {
+  background: linear-gradient(90deg, #4cae4c 60%, #5cb85c 100%);
+  box-shadow: 0 4px 16px 0 rgba(92,184,92,0.13);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #5cb85c;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 8px;
+  transition: color 0.2s;
+}
+
+.btn-link:hover {
+  color: #388e3c;
+  text-decoration: underline;
+}
+
+.remember-me label {
+  color: #555;
+  font-size: 0.98rem;
+}
+
+.forgot-password {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 0.98rem;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.privacy-policy {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.switch-form {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 1rem;
+}
