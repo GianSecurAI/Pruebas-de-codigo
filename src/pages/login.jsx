@@ -56,10 +56,43 @@ const Login = () => {
     }
   };
 
-  const handleRegisterSubmit = (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    // Simulación de registro
-    alert('Registro exitoso. Ahora puedes iniciar sesión.');
+    const user = {
+      nombreCompleto: registerName,
+      correo: registerEmail,
+      password: registerPassword,
+      telefono: registerPhone,
+      direccion: registerAddress,
+      estado: "activo",
+      id_rol: 2,
+      role: "USER"
+    };
+
+    try {
+      const response = await fetch('http://localhost:8090/auth/user/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert(data.message);
+        setShowRegister(false);
+        setLoginEmail(registerEmail);
+      } else {
+        const error = await response.text();
+        console.error('Error en el registro:', error);
+        alert('Error en el registro');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+      alert('No se pudo conectar al servidor');
+    }
+
     setShowRegister(false);
     setLoginEmail(registerEmail);
     setRegisterName('');

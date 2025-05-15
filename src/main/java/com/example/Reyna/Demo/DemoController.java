@@ -21,7 +21,7 @@ public class DemoController {
     public ResponseEntity<RequestResponse> register(@RequestBody User user)
     {
         RequestResponse requestResponse = new RequestResponse();
-        requestResponse.setMessage("User created");
+        requestResponse.setMessage("Usuario creado con éxito");
         requestResponse.setData(serviceUser.saveUser(user));
         return ResponseEntity.ok(requestResponse);
     }
