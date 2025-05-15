@@ -28,23 +28,25 @@ import lombok.NoArgsConstructor;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
-    @Column(nullable = false)
+    @Column(name = "id_usuario")
     Integer id_usuario;
 
-    @Basic
     @Column(name = "nombre_completo", nullable = false) // Mapeando correctamente con el nombre de columna en la base de datos
     String nombreCompleto; // Usamos el nombre en camelCase para la variable
-
-    @Column(nullable = false)
+    @Column(name="correo", nullable = false)
     String correo;
-
-    String contraseña;
+    @Column(name="password", nullable = false)
+    String password;
+    @Column(name="telefono", nullable = false)
     String telefono;
+    @Column(name="direccion", nullable = false)
     String direccion;
-    String Estado;
-
+    @Column(name="estado", nullable = false)
+    String estado;
+    @Column(name="id_rol", nullable = false)
+    String id_rol;
     @Enumerated(EnumType.STRING)
+    @Column(name="role", nullable = false)
     Role role;
 
     @Override
@@ -74,7 +76,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.contraseña;
+        return this.password;
     }
 
     @Override
