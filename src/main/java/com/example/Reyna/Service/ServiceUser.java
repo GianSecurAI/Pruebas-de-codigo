@@ -10,6 +10,15 @@ public class ServiceUser {
     @Autowired
     private UserRepository userRepository;
 
+    public User login(String correo, String password) {
+        User user = userRepository.findByCorreo(correo);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        } else {
+            return null; // or throw an exception
+        }
+    }
+
     public User saveUser(User user) {
         return  userRepository.save(user);
     }

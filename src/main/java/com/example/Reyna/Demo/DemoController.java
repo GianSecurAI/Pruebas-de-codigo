@@ -4,10 +4,7 @@ import com.example.Reyna.User.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.example.Reyna.Service.ServiceUser;
 
 import lombok.RequiredArgsConstructor;
@@ -27,5 +24,22 @@ public class DemoController {
         requestResponse.setMessage("User created");
         requestResponse.setData(serviceUser.saveUser(user));
         return ResponseEntity.ok(requestResponse);
+    }
+
+    @PostMapping(value = "/user/login")
+    public ResponseEntity<RequestResponse> login(@RequestParam String correo, @RequestParam String password)
+    {
+        User user = new User();
+
+        user = serviceUser.login(correo, password);
+        RequestResponse requestResponse = new RequestResponse();
+        if(user != null){
+            requestResponse.setMessage("Usuario Logeado con ñ");
+            requestResponse.setData(user);
+            return ResponseEntity.ok(requestResponse);
+        } else {
+            requestResponse.setMessage("Credenciales invalidas se eñeñisaron");
+            return ResponseEntity.status(401).body(requestResponse);
+        }
     }
 }

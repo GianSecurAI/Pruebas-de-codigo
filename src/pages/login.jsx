@@ -24,19 +24,35 @@ const Login = () => {
     if (user) navigate('/');
   }, [navigate]);
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    // Simulación de validación
-    if (loginEmail && loginPassword) {
-      // Guardar usuario en localStorage (solo nombre, simulado)
-      localStorage.setItem('user', JSON.stringify({
-        name: loginEmail.split('@')[0].substring(0, 8) // Máx 8 caracteres
-      }));
-      alert('Inicio de sesión exitoso');
-      navigate('/');
-      window.location.reload(); // Para refrescar el navbar
-    } else {
-      alert('Credenciales incorrectas');
+
+    const formData = new URLSearchParams();
+    formData.append("correo", loginEmail);
+    formData.append("password", loginPassword);
+
+    try {
+      const response = await fetch('http://localhost:8090/auth/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: formData.toString()
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('user', JSON.stringify(data.data)); // guarda el objeto user
+        alert(data.message);
+        navigate('/');
+        window.location.reload();
+      } else {
+        alert(data.message); // muestra mensaje de error desde backend
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+      alert('Error al conectar con el servidor');
     }
   };
 
