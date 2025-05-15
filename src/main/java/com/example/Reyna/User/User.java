@@ -31,22 +31,22 @@ public class User implements UserDetails {
     @Column(name = "id_usuario")
     Integer id_usuario;
 
-    @Column(name = "nombre_completo", nullable = false) // Mapeando correctamente con el nombre de columna en la base de datos
+    @Column(name = "nombre_completo") // Mapeando correctamente con el nombre de columna en la base de datos
     String nombreCompleto; // Usamos el nombre en camelCase para la variable
-    @Column(name="correo", nullable = false)
+    @Column(name="correo")
     String correo;
-    @Column(name="password", nullable = false)
+    @Column(name="password")
     String password;
-    @Column(name="telefono", nullable = false)
+    @Column(name="telefono")
     String telefono;
-    @Column(name="direccion", nullable = false)
+    @Column(name="direccion")
     String direccion;
-    @Column(name="estado", nullable = false)
+    @Column(name="estado")
     String estado;
-    @Column(name="id_rol", nullable = false)
+    @Column(name="id_rol")
     String id_rol;
     @Enumerated(EnumType.STRING)
-    @Column(name="role", nullable = false)
+    @Column(name="role")
     Role role;
 
     @Override
