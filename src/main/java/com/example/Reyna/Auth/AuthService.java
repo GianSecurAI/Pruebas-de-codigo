@@ -36,11 +36,11 @@ public class AuthService {
     public AuthResponse register(RegisterRequest request) {
         User user = User.builder()
             .nombreCompleto(request.getNombre_completo())
-            .contraseña(passwordEncoder.encode( request.getContraseña()))
+            .password(passwordEncoder.encode( request.getContraseña()))
             .correo(request.getCorreo())
             .telefono(request.telefono)
             .direccion(request.getDireccion())
-            .Estado(request.getEstado())
+            .estado(request.getEstado())
             .role(Role.USER)
             .build();
 
