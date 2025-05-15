@@ -1,4 +1,4 @@
-# 👑 Reyna - Aplicación Web Segura
+# 👑 Reyna - Aplicación Web 
 
 **Reyna** es una aplicación web que combina un frontend desarrollado con **React** y un backend robusto con **Spring Boot**. Esta solución integra autenticación de usuarios mediante **JWT (JSON Web Token)** y se conecta a una base de datos **PostgreSQL** alojada en la nube a través de **Neon Tech**.
 
