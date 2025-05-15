@@ -14,6 +14,8 @@ const Login = () => {
   const [registerPhone, setRegisterPhone] = useState('');
   const [registerAddress, setRegisterAddress] = useState('');
   const [showRegister, setShowRegister] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRegisterPassword, setShowRegisterPassword] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,15 +71,37 @@ const Login = () => {
                   required
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group" style={{ position: 'relative' }}>
                 <label htmlFor="login-password">Contraseña *</label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="login-password"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
                   required
+                  style={{ paddingRight: '38px' }}
                 />
+                <button
+                  type="button"
+                  className="show-password-btn"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  tabIndex={-1}
+                  aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: '#888',
+                    fontSize: '1.2em',
+                    padding: 0
+                  }}
+                >
+                  <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
+                </button>
               </div>
               <div className="form-options">
                 <button type="submit" className="btn-submit">Acceder</button>
@@ -116,15 +140,37 @@ const Login = () => {
                   required
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group" style={{ position: 'relative' }}>
                 <label htmlFor="register-password">Contraseña *</label>
                 <input
-                  type="password"
+                  type={showRegisterPassword ? "text" : "password"}
                   id="register-password"
                   value={registerPassword}
                   onChange={(e) => setRegisterPassword(e.target.value)}
                   required
+                  style={{ paddingRight: '38px' }}
                 />
+                <button
+                  type="button"
+                  className="show-password-btn"
+                  onClick={() => setShowRegisterPassword((prev) => !prev)}
+                  tabIndex={-1}
+                  aria-label={showRegisterPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: '#888',
+                    fontSize: '1.2em',
+                    padding: 0
+                  }}
+                >
+                  <i className={`bi ${showRegisterPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
+                </button>
               </div>
               <div className="form-group">
                 <label htmlFor="register-phone">Teléfono</label>

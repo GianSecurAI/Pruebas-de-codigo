@@ -6,7 +6,10 @@
   justify-content: space-between;
 }
 
+/* Ajuste para que el contenido no quede debajo del navbar fijo */
 .login-container {
+  margin-top: 90px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,7 +64,8 @@ h2 {
 .form-group input[type="text"],
 .form-group input[type="tel"] {
   width: 100%;
-  padding: 12px 14px;
+  padding: 12px 38px 12px 14px;
+  /* padding-right aumentado para dejar espacio al botón */
   border: 1.5px solid #e0e0e0;
   border-radius: 7px;
   box-sizing: border-box;
@@ -74,6 +78,25 @@ h2 {
   border: 1.5px solid #5cb85c;
   outline: none;
   background: #fff;
+}
+
+.show-password-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  font-size: 1.2em;
+  padding: 0;
+  z-index: 2;
+}
+
+.show-password-btn:focus {
+  outline: none;
+  color: #5cb85c;
 }
 
 .form-options {
