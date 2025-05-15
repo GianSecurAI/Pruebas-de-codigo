@@ -24,10 +24,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "usuario", uniqueConstraints = {@UniqueConstraint(columnNames = {"nombre_completo", "correo"})})
+@Table(name = "usuario")
 public class User implements UserDetails {
 
     @Id
+    @GeneratedValue
     @Column(name = "id_usuario")
     Integer id_usuario;
 
@@ -44,7 +45,7 @@ public class User implements UserDetails {
     @Column(name="estado")
     String estado;
     @Column(name="id_rol")
-    String id_rol;
+    Integer id_rol;
     @Enumerated(EnumType.STRING)
     @Column(name="role")
     Role role;
@@ -137,11 +138,11 @@ public class User implements UserDetails {
         this.estado = estado;
     }
 
-    public String getId_rol() {
+    public Integer getId_rol() {
         return id_rol;
     }
 
-    public void setId_rol(String id_rol) {
+    public void setId_rol(Integer id_rol) {
         this.id_rol = id_rol;
     }
 

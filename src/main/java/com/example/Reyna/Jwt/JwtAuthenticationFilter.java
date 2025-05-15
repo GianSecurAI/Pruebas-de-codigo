@@ -31,6 +31,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
        
         final String token = getTokenFromRequest(request);
         final String nombre_completo;
+        String path = request.getRequestURI();
+
+        if (path.startsWith("/auth")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         if (token==null)
         {
