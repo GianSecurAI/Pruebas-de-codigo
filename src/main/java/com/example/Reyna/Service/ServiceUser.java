@@ -2,6 +2,7 @@ package com.example.Reyna.Service;
 
 import com.example.Reyna.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.example.Reyna.User.User;
 
@@ -9,10 +10,13 @@ import com.example.Reyna.User.User;
 public class ServiceUser {
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public User login(String correo, String password) {
         User user = userRepository.findByCorreo(correo);
-        if (user != null && user.getPassword().equals(password)) {
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             return user;
         } else {
             return null; // or throw an exception
@@ -20,6 +24,8 @@ public class ServiceUser {
     }
 
     public User saveUser(User user) {
-        return  userRepository.save(user);
+        // Encriptamos la contraseña antes de guardarla
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 }
