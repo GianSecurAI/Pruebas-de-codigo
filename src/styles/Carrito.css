@@ -1,0 +1,158 @@
+/* Estilos para la página de carrito */
+
+.cesta-header {
+  background-color: #f5f5f5;
+  padding: 2rem 0;
+  margin-bottom: 1rem;
+}
+
+.cesta-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.cesta-header h1:after {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 2px;
+  background-color: #d4a5a5;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tabla-carrito {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.tabla-carrito table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.tabla-carrito th {
+  background-color: #e9baba;
+  color: #333;
+  padding: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.tabla-carrito td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.cart-item-image {
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: cover;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-control button {
+  background-color: #f0f0f0;
+  border: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  margin: 0 0.5rem;
+}
+
+.quantity-control span {
+  min-width: 30px;
+  text-align: center;
+}
+
+.remove-btn {
+  color: #dc3545;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+}
+
+.promo-code-section {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.promo-code-section h5 {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.input-group .form-control {
+  border: 1px solid #ccc;
+  height: 38px;
+  border-right: 0;
+}
+
+.apply-btn {
+  background-color: #e9baba;
+  border: none;
+  color: #333;
+  font-weight: 600;
+  padding: 0.375rem 1.5rem;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.apply-btn:hover {
+  background-color: #d4a5a5;
+}
+
+.cart-totals {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.total-line {
+  font-weight: bold;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ccc;
+}
+
+.checkout-btn {
+  background-color: #e9baba;
+  border: none;
+  padding: 0.5rem 2rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #333;
+}
+
+.checkout-btn:hover {
+  background-color: #d4a5a5;
+  color: #333;
+}
+
+.empty-cart {
+  padding: 3rem;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+}
+
+.empty-cart-icon {
+  font-size: 4rem;
+  color: #d4a5a5;
+  margin-bottom: 1rem;
+}
