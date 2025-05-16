@@ -3,16 +3,47 @@
   background-size: cover;
   background-position: center;
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px;
   color: white;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 200px; /* Ajusta según el diseño */
+  height: 180px; /* Altura para móviles */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Responsive: pantallas medianas y grandes */
+@media (min-width: 768px) {
+  .promo-card {
+    padding: 20px;
+    height: 200px; /* Altura para pantallas más grandes */
+  }
+}
+
+/* Estilos para el título y descripción */
+.promo-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.promo-description {
+  font-size: 0.875rem;
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .promo-title {
+    font-size: 1.25rem;
+  }
+  .promo-description {
+    font-size: 1rem;
+  }
 }
 
 /* Efecto hover */

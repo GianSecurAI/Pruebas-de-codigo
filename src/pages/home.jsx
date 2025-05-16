@@ -27,9 +27,9 @@ const Home = () => {
       <div className="section-title-container">
         <h2 className="section-title">CATEGORÍAS</h2>
       </div>
-      <section className="categorias py-5">
+      <section className="categorias py-3 py-md-5">
         <div className="container">
-          <div className="row g-4 justify-content-center">
+          <div className="row g-3 g-md-4 justify-content-center">
             <CategoryCard image={categoriaFraganciasImg} title="FRAGANCIAS" />
             <CategoryCard image={categoriaTratamientosImg} title="TRATAMIENTOS FACIALES" />
             <CategoryCard image={categoriaMaquillajeImg} title="MAQUILLAJE" />
@@ -41,26 +41,26 @@ const Home = () => {
       <div className="section-title-container productos-estrella-title-container">
         <h2 className="section-title">NUESTROS PRODUCTOS ESTRELLA</h2>
       </div>
-      <section className="productos-estrella py-5" style={{ background: '#f8f3f7' }}>
+      <section className="productos-estrella py-3 py-md-5" style={{ background: '#f8f3f7' }}>
         <div className="container">
-          <div className="row g-4 justify-content-center">
-            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" />
-            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" />
-            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" />
-            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" />
+          <div className="row g-3 g-md-4 justify-content-center">
+            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/1" />
+            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/2" />
+            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/3" />
+            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/4" />
           </div>
         </div>
       </section>
-      <section className="container py-4">
-        <div className="row g-4">
-          <div className="col-md-6">
+      <section className="container py-3 py-md-4">
+        <div className="row g-3 g-md-4">
+          <div className="col-12 col-md-6">
             <PromoCard
               backgroundImage={promoRegaloBgImg}
               title="¡REGALO POR COMPRA!"
               description="Llévate un producto de regalo por compras mayores a S/150"
             />
           </div>
-          <div className="col-md-6">
+          <div className="col-12 col-md-6">
             <PromoCard
               backgroundImage={promoDescuentoBgImg}
               title="HASTA UN 50% EN PRODUCTOS SELECCIONADOS"

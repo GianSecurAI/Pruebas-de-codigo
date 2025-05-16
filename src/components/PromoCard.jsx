@@ -16,8 +16,8 @@ const PromoCard = ({ backgroundImage, title, description }) => {
         textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)',
       }}
     >
-      <h5>{title}</h5>
-      {description && <p>{description}</p>}
+      <h5 className="promo-title">{title}</h5>
+      {description && <p className="promo-description">{description}</p>}
     </div>
   );
 };

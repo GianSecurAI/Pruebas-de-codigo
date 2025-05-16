@@ -4,7 +4,7 @@ import '../styles/categorycard.css';
 
 function CategoryCard({ image, title }) {
   return (
-    <div className="col-12 col-md-3">
+    <div className="col-6 col-md-3">
       <div className="card border-0 shadow-sm position-relative overflow-hidden">
         <img src={image} className="card-img" alt={title} loading="lazy" />
         <div className="card-img-overlay d-flex justify-content-center align-items-center p-0">

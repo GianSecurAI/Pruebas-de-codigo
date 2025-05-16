@@ -11,9 +11,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 50px; /* Espacio considerable arriba del título */
-  margin-bottom: 40px; /* Espacio considerable abajo del título */
+  margin-top: 30px; /* Espacio reducido en móviles */
+  margin-bottom: 30px; /* Espacio reducido en móviles */
   padding: 0 15px; /* Padding lateral para evitar que las líneas toquen los bordes en pantallas pequeñas */
+}
+
+@media (min-width: 768px) {
+  .section-title-container {
+    margin-top: 50px; /* Más espacio en pantallas grandes */
+    margin-bottom: 40px; /* Más espacio en pantallas grandes */
+  }
 }
 
 .section-title-container::before,
@@ -26,12 +33,25 @@
 }
 
 .section-title {
-  font-size: 1.6em; /* Tamaño del texto del título, ajústalo si es necesario */
-  color: #9d705d; /* Mismo color que las líneas para consistencia */
-  text-transform: uppercase; /* Para que el texto esté en mayúsculas */
-  white-space: nowrap; /* Evita que el título se parta en varias líneas */
-  font-weight: 500; /* Un peso de fuente medio */
-  letter-spacing: 1px; /* Un ligero espaciado entre letras */
+  font-size: 1.2em; /* Tamaño más pequeño para móviles */
+  color: #9d705d;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+@media (min-width: 576px) {
+  .section-title {
+    font-size: 1.4em; /* Tamaño mediano para tablets */
+    white-space: nowrap; /* Evita que el título se parta en pantallas medianas */
+  }
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 1.6em; /* Tamaño original para pantallas grandes */
+  }
 }
 
 /* Contenedor principal de la página Home */

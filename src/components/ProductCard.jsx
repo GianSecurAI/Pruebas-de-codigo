@@ -5,16 +5,16 @@ import '../styles/ProductCard.css';
 
 const ProductCard = ({ image, name, price, link }) => { 
   return (
-    <div className="col-12 col-md-3">
+    <div className="col-12 col-sm-6 col-lg-3">
       <div className="card p-3 text-center border-0 shadow-sm product-card">
-        <Link to={link} className="text-decoration-none"> {/* Envolver solo la imagen */} 
+        <Link to={link} className="text-decoration-none"> 
           <img src={image} className="card-img-top mx-auto" alt={name} />
         </Link>
-        <div className="card-body"> {/* El cuerpo de la tarjeta ya no está envuelto por el Link principal */}
-          <div className="product-card-name">{name}</div> {/* El nombre ya no es un enlace */}
+        <div className="card-body">
+          <div className="product-card-name">{name}</div>
           <div className="product-card-price">{price}</div>
         </div>
-        <Link to={link} className="btn product-card-btn"> {/* Botón también como Link */} 
+        <Link to={link} className="btn product-card-btn">
           COMPRAR AHORA
         </Link>
       </div>
