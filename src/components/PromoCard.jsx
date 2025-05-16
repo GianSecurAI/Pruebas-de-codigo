@@ -14,6 +14,11 @@ const PromoCard = ({ backgroundImage, title, description }) => {
         padding: '20px',
         color: 'white',
         textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        minHeight: '180px'
       }}
     >
       <h5 className="promo-title">{title}</h5>

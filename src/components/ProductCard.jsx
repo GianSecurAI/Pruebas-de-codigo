@@ -5,16 +5,18 @@ import '../styles/ProductCard.css';
 
 const ProductCard = ({ image, name, price, link }) => { 
   return (
-    <div className="col-12 col-sm-6 col-lg-3">
-      <div className="card p-3 text-center border-0 shadow-sm product-card">
+    <div className="card p-2 p-sm-3 text-center border-0 shadow-sm product-card h-100">
+      <div className="product-image-container">
         <Link to={link} className="text-decoration-none"> 
-          <img src={image} className="card-img-top mx-auto" alt={name} />
+          <img src={image} className="product-img mx-auto" alt={name} />
         </Link>
-        <div className="card-body">
-          <div className="product-card-name">{name}</div>
-          <div className="product-card-price">{price}</div>
-        </div>
-        <Link to={link} className="btn product-card-btn">
+      </div>
+      <div className="card-body d-flex flex-column">
+        <h3 className="product-card-name">{name}</h3>
+        <div className="product-card-price">{price}</div>
+      </div>
+      <div className="mt-auto">
+        <Link to={link} className="btn product-card-btn w-100">
           COMPRAR AHORA
         </Link>
       </div>

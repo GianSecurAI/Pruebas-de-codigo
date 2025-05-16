@@ -30,10 +30,18 @@ const Home = () => {
       <section className="categorias py-3 py-md-5">
         <div className="container">
           <div className="row g-3 g-md-4 justify-content-center">
-            <CategoryCard image={categoriaFraganciasImg} title="FRAGANCIAS" />
-            <CategoryCard image={categoriaTratamientosImg} title="TRATAMIENTOS FACIALES" />
-            <CategoryCard image={categoriaMaquillajeImg} title="MAQUILLAJE" />
-            <CategoryCard image={categoriaCuidadoImg} title="CUIDADO PERSONAL" />
+            <div className="col-6 col-md-3 mb-3">
+              <CategoryCard image={categoriaFraganciasImg} title="FRAGANCIAS" />
+            </div>
+            <div className="col-6 col-md-3 mb-3">
+              <CategoryCard image={categoriaTratamientosImg} title="TRATAMIENTOS FACIALES" />
+            </div>
+            <div className="col-6 col-md-3 mb-3">
+              <CategoryCard image={categoriaMaquillajeImg} title="MAQUILLAJE" />
+            </div>
+            <div className="col-6 col-md-3 mb-3">
+              <CategoryCard image={categoriaCuidadoImg} title="CUIDADO PERSONAL" />
+            </div>
           </div>
         </div>
       </section>
@@ -41,19 +49,27 @@ const Home = () => {
       <div className="section-title-container productos-estrella-title-container">
         <h2 className="section-title">NUESTROS PRODUCTOS ESTRELLA</h2>
       </div>
-      <section className="productos-estrella py-3 py-md-5" style={{ background: '#f8f3f7' }}>
+      <section className="productos-estrella py-4 py-md-5" style={{ background: '#f8f3f7' }}>
         <div className="container">
           <div className="row g-3 g-md-4 justify-content-center">
-            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/1" />
-            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/2" />
-            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/3" />
-            <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/4" />
+            <div className="col-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+              <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/1" />
+            </div>
+            <div className="col-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+              <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/2" />
+            </div>
+            <div className="col-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+              <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/3" />
+            </div>
+            <div className="col-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+              <ProductCard image={prodFrag1Img} name="Set Cori Rosé: Parfum + Loción Perfumada" price="S/ 119.00" link="/productos/4" />
+            </div>
           </div>
         </div>
       </section>
-      <section className="container py-3 py-md-4">
-        <div className="row g-3 g-md-4">
-          <div className="col-12 col-md-6">
+      <section className="container py-4 py-md-5">
+        <div className="row g-4">
+          <div className="col-12 col-md-6 mb-3 mb-md-0">
             <PromoCard
               backgroundImage={promoRegaloBgImg}
               title="¡REGALO POR COMPRA!"
