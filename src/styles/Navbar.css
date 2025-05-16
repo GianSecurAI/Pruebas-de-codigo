@@ -10,3 +10,125 @@
   max-height: 40px; /* Ajusta este valor según sea necesario */
   width: auto; /* Mantiene la proporción de la imagen */
 }
+
+/* Estilos para el ícono del carrito */
+.cart-icon-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #d4a5a5;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Estilos para el panel lateral del carrito */
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100vh;
+  background-color: white;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 1100;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+}
+
+.cart-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #e9baba;
+  color: #333;
+}
+
+.cart-panel-header h5 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.close-cart-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.cart-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.cart-items {
+  margin-bottom: 15px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item-image {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+}
+
+.cart-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-item-details h6 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cart-item-details p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.cart-panel-footer {
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+
+.empty-cart-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  text-align: center;
+}
+
+.empty-cart-message p {
+  margin-bottom: 15px;
+  color: #666;
+}

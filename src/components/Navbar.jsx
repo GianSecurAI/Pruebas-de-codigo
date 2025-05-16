@@ -7,7 +7,10 @@ import '../styles/Navbar.css';
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+  const [showCart, setShowCart] = useState(false);
   const dropdownRef = useRef(null);
+  const cartPanelRef = useRef(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -16,13 +19,33 @@ const Navbar = () => {
     } else {
       setUser(null);
     }
+    
+    // Actualizar la cuenta del carrito al cargar
+    updateCartCount();
+    
+    // Escuchar los eventos de actualización del carrito
+    window.addEventListener('cartUpdated', updateCartCount);
+    
+    return () => {
+      window.removeEventListener('cartUpdated', updateCartCount);
+    };
   }, []);
 
-  // Cerrar el menú al hacer clic fuera
+  // Actualizar contador de productos en el carrito
+  const updateCartCount = () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const count = cart.reduce((total, item) => total + item.quantity, 0);
+    setCartCount(count);
+  };
+
+  // Cerrar el menú y el panel del carrito al hacer clic fuera
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowDropdown(false);
+      }
+      if (cartPanelRef.current && !cartPanelRef.current.contains(event.target)) {
+        setShowCart(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -58,33 +81,90 @@ const Navbar = () => {
             <li className="nav-item"><Link className="nav-link active" to="/">INICIO</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/productos">PRODUCTOS</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/nosotros">NOSOTROS</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/contacto">CONTACTO</Link></li>
-          </ul>
-          <div style={{ position: 'relative', display: 'inline-block' }} ref={dropdownRef}>
-            <Link to="/cesta" className="me-3 text-decoration-none navbar-link" aria-label="Cesta">
+            <li className="nav-item"><Link className="nav-link" to="/contacto">CONTACTO</Link></li>          </ul>
+          <div className="d-flex align-items-center">
+            {/* Icono del carrito */}
+            <span 
+              className="me-3 text-decoration-none navbar-link cart-icon-container" 
+              aria-label="Cesta" 
+              style={{ cursor: 'pointer', position: 'relative' }}
+              onClick={() => setShowCart(!showCart)}
+            >
               <i className="bi bi-bag"></i> CESTA
-            </Link>
-            {user ? (
-              <span
-                className="text-decoration-none navbar-link user-dropdown"
-                style={{ cursor: 'pointer' }}
-                onClick={() => setShowDropdown((prev) => !prev)}
-              >
-                <i className="bi bi-person"></i> {user.name}
-                <i className="bi bi-caret-down-fill ms-1" style={{ fontSize: '0.7em' }}></i>
-              </span>
-            ) : (
-              <Link to="/login" className="text-decoration-none navbar-link" aria-label="Cuenta">
-                <i className="bi bi-person"></i> CUENTA
-              </Link>
-            )}
-            {user && showDropdown && (
-              <div className="user-dropdown-menu" style={{ position: 'absolute', right: 0, top: '100%', background: '#fff', border: '1px solid #ddd', borderRadius: 4, minWidth: 120, zIndex: 1000 }}>
-                <button className="dropdown-item w-100 text-start" onClick={handleLogout} style={{ background: 'none', border: 'none', padding: '8px 16px', cursor: 'pointer' }}>
-                  Salir
-                </button>
+              {cartCount > 0 && (
+                <span className="cart-count">{cartCount}</span>
+              )}
+            </span>
+            
+            {/* Panel lateral del carrito */}
+            {showCart && (
+              <div className="cart-panel" ref={cartPanelRef}>
+                <div className="cart-panel-header">
+                  <h5>CESTA DE COMPRA</h5>
+                  <button className="close-cart-btn" onClick={(e) => {e.stopPropagation(); setShowCart(false)}}>
+                    <i className="bi bi-x-lg"></i>
+                  </button>
+                </div>
+                
+                <div className="cart-panel-body">
+                  {cartCount > 0 ? (
+                    <>
+                      <div className="cart-items">
+                        {(JSON.parse(localStorage.getItem('cart')) || []).map((item, index) => (
+                          <div key={index} className="cart-item">
+                            <div className="cart-item-image">
+                              <img src={item.image} alt={item.name} />
+                            </div>
+                            <div className="cart-item-details">
+                              <h6>{item.name}</h6>
+                              <p>Cantidad: {item.quantity}</p>
+                              <p>Precio: S/ {item.price.toFixed(2)}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="cart-panel-footer">
+                        <Link to="/carrito" className="btn btn-primary w-100" onClick={() => setShowCart(false)}>
+                          IR AL CARRITO
+                        </Link>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="empty-cart-message">
+                      <p>Tu carrito está vacío</p>
+                      <Link to="/productos" className="btn btn-outline-primary" onClick={() => setShowCart(false)}>
+                        Ver Productos
+                      </Link>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
+            
+            {/* Menú de usuario */}
+            <div ref={dropdownRef} style={{ position: 'relative', display: 'inline-block' }}>
+              {user ? (
+                <span
+                  className="text-decoration-none navbar-link user-dropdown"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => setShowDropdown((prev) => !prev)}
+                >
+                  <i className="bi bi-person"></i> {user.name}
+                  <i className="bi bi-caret-down-fill ms-1" style={{ fontSize: '0.7em' }}></i>
+                </span>
+              ) : (
+                <Link to="/login" className="text-decoration-none navbar-link" aria-label="Cuenta">
+                  <i className="bi bi-person"></i> CUENTA
+                </Link>
+              )}
+              {user && showDropdown && (
+                <div className="user-dropdown-menu" style={{ position: 'absolute', right: 0, top: '100%', background: '#fff', border: '1px solid #ddd', borderRadius: 4, minWidth: 120, zIndex: 1000 }}>
+                  <button className="dropdown-item w-100 text-start" onClick={handleLogout} style={{ background: 'none', border: 'none', padding: '8px 16px', cursor: 'pointer' }}>
+                    Salir
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

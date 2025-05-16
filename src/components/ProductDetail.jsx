@@ -5,9 +5,55 @@ import '../styles/ProductDetail.css';
 
 const ProductDetail = ({ image, title, volume, price, description, ingredients }) => {
   const [quantity, setQuantity] = useState(1);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const handleQuantityChange = (delta) => {
     setQuantity((prev) => Math.max(1, prev + delta));
+  };
+  
+  const addToCart = () => {
+    // Convertir el precio de formato "S/ XX.XX" a número
+    const numericPrice = parseFloat(price.replace('S/ ', ''));
+    
+    // Crear el objeto de producto para el carrito
+    const productToAdd = {
+      image,
+      name: title,
+      volume,
+      price: numericPrice,
+      quantity,
+      discountedPrice: null // Inicializa sin descuento, podrá aplicarse después
+    };
+    
+    // Obtener el carrito actual o iniciar uno vacío
+    let currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Verificar si el producto ya está en el carrito
+    const existingProductIndex = currentCart.findIndex(
+      item => item.name === title && item.volume === volume
+    );
+    
+    if (existingProductIndex !== -1) {
+      // Si el producto ya existe, actualizar la cantidad
+      currentCart[existingProductIndex].quantity += quantity;
+    } else {
+      // Si no existe, añadirlo al carrito
+      currentCart.push(productToAdd);
+    }
+    
+    // Guardar en localStorage
+    localStorage.setItem('cart', JSON.stringify(currentCart));
+    
+    // Actualizar el estado para mostrar un mensaje
+    setAddedToCart(true);
+    
+    // Desvanecer el mensaje después de 3 segundos
+    setTimeout(() => {
+      setAddedToCart(false);
+    }, 3000);
+    
+    // Disparar un evento para actualizar el contador del carrito
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   return (
@@ -56,7 +102,15 @@ const ProductDetail = ({ image, title, volume, price, description, ingredients }
           </form>
 
           {/* Botón Agregar a la Bolsa */}
-          <button className="btn btn-agregar mb-4">AGREGAR A LA BOLSA</button>
+          <button className="btn btn-agregar mb-4" onClick={addToCart}>
+            AGREGAR A LA BOLSA
+          </button>
+          
+          {addedToCart && (
+            <div className="alert alert-success" role="alert">
+              Producto añadido al carrito correctamente.
+            </div>
+          )}
 
           {/* Descripción del Producto */}
           <div className="mb-3">
