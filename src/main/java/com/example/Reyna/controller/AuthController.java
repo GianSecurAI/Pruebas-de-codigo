@@ -1,4 +1,4 @@
-package com.example.Reyna.Auth;
+package com.example.Reyna.controller;
 
 // Importaciones necesarias para manejar respuestas HTTP y anotaciones de Spring
 import org.springframework.http.ResponseEntity;
@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.Reyna.Service.AuthService;
+import com.example.Reyna.model.AuthResponse;
+import com.example.Reyna.model.LoginRequest;
+import com.example.Reyna.model.RegisterRequest;
 
 import lombok.RequiredArgsConstructor;
 

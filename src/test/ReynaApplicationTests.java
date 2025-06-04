@@ -1,4 +1,4 @@
-package com.example.Reyna;
+package com.example.Reyna.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
