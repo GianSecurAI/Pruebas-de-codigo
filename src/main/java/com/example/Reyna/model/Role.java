@@ -1,4 +1,4 @@
-package com.example.Reyna.User;
+package com.example.Reyna.model;
 
 public enum Role {
     ADMIN,

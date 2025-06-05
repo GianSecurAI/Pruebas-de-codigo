@@ -1,4 +1,4 @@
-package com.example.Reyna.config;
+package com.example.Reyna.security;
 
     import org.springframework.context.annotation.Bean;
     import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ package com.example.Reyna.config;
     import org.springframework.security.web.SecurityFilterChain;
     import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
     
-    import com.example.Reyna.Jwt.JwtAuthenticationFilter;
+    import com.example.Reyna.security.JwtAuthenticationFilter;
     
     import lombok.RequiredArgsConstructor;
     

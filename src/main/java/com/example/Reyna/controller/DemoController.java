@@ -1,10 +1,12 @@
-package com.example.Reyna.Demo;
+package com.example.Reyna.controller;
 
-import com.example.Reyna.User.User;
+import com.example.Reyna.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.Reyna.Demo.RequestResponse;
 import com.example.Reyna.Service.ServiceUser;
 
 import lombok.RequiredArgsConstructor;

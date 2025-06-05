@@ -1,4 +1,4 @@
-package com.example.Reyna.Auth;
+package com.example.Reyna.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.example.Reyna.User;
+package com.example.Reyna.model;
 
 import java.util.Collection;
 import java.util.List;

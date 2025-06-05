@@ -1,4 +1,4 @@
-package com.example.Reyna.Jwt;
+package com.example.Reyna.security;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.example.Reyna.Auth;
+package com.example.Reyna.Service;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -6,10 +6,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.Reyna.Jwt.JwtService;
-import com.example.Reyna.User.Role;
-import com.example.Reyna.User.User;
-import com.example.Reyna.User.UserRepository;
+import com.example.Reyna.security.JwtService;
+import com.example.Reyna.model.AuthResponse;
+import com.example.Reyna.model.LoginRequest;
+import com.example.Reyna.model.RegisterRequest;
+import com.example.Reyna.model.Role;
+import com.example.Reyna.model.User;
+import com.example.Reyna.dao.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +29,7 @@ public class AuthService {
     public AuthResponse login(LoginRequest request) {
         // Autentica el usuario usando Spring Security (verifica nickname y contraseña)
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getNombre_completo(), request.getContraseña()));
-        UserDetails user = userRepository.findByNombreCompleto(request.getNombre_completo()).orElseThrow();
+        User user = userRepository.findByNombreCompleto(request.getNombre_completo()).orElseThrow();
         String token=jwtService.getToken(user);
         return AuthResponse.builder()
             .token(token)
@@ -38,7 +41,7 @@ public class AuthService {
             .nombreCompleto(request.getNombre_completo())
             .password(passwordEncoder.encode( request.getContraseña()))
             .correo(request.getCorreo())
-            .telefono(request.telefono)
+            .telefono(request.getTelefono())
             .direccion(request.getDireccion())
             .estado(request.getEstado())
             .role(Role.USER)

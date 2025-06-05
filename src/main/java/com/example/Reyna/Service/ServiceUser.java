@@ -1,10 +1,10 @@
 package com.example.Reyna.Service;
 
-import com.example.Reyna.User.UserRepository;
+import com.example.Reyna.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.example.Reyna.User.User;
+import com.example.Reyna.model.User;
 
 @Service
 public class ServiceUser {
