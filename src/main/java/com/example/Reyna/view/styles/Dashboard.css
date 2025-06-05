@@ -1,0 +1,108 @@
+.dashboard-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 160px); /* Ajusta según la altura del navbar y footer */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px; /* Espacio para el navbar fijo */
+}
+
+.dashboard-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #333;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.dashboard-sections {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.dashboard-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.dashboard-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #444;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.dashboard-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dashboard-card {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+}
+
+/* Colores para las tarjetas de mantenimiento */
+.dashboard-card.maintenance {
+  background: linear-gradient(135deg, #ff4b4b, #ff6b6b);
+  border: none;
+}
+
+/* Colores para las tarjetas de ventas */
+.dashboard-card.sales {
+  background: linear-gradient(135deg, #4b6fff, #6b8bff);
+  border: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-sections {
+    gap: 2rem;
+  }
+
+  .dashboard-section {
+    min-width: 250px;
+  }
+
+  .dashboard-title {
+    font-size: 2rem;
+  }
+
+  .dashboard-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-card h3 {
+    font-size: 1.2rem;
+  }
+}

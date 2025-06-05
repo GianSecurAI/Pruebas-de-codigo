@@ -28,8 +28,8 @@ const Footer = () => {
             <div className="footer-contact">demo@lareyna.com</div>
             <div className="footer-contact">(+34) 947 002 963</div>
             <div className="mt-2 footer-social-icons">
-              <a href="#" aria-label="Instagram"><i className="bi bi-instagram"></i></a>
-              <a href="#" aria-label="Facebook"><i className="bi bi-facebook"></i></a>
+              <a href="https://instagram.com/lareyna" aria-label="Instagram"><i className="bi bi-instagram"></i></a>
+              <a href="https://facebook.com/LaReynaOficial" aria-label="Facebook"><i className="bi bi-facebook"></i></a>
             </div>
           </div>
         </div>

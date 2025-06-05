@@ -1,0 +1,416 @@
+.productos-admin-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 100px;
+}
+
+.productos-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.productos-header h1 {
+  color: #333;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.productos-acciones {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.btn-accion {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  min-width: 160px;
+}
+
+.btn-agregar {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-agregar:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.btn-buscar {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-buscar:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.btn-guardar {
+  background-color: #ffc107;
+  color: black;
+}
+
+.btn-guardar:hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+}
+
+.btn-salir {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-salir:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+.productos-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.productos-filtros {
+  margin-bottom: 2rem;
+}
+
+.categoria-select {
+  width: 200px;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.productos-tabla {
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+.productos-tabla table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.productos-tabla th,
+.productos-tabla td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.productos-tabla th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.productos-tabla tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Estilos para el Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+  padding-top: 100px;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content h2 {
+  color: #333;
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.divisor {
+  border: none;
+  border-top: 1px solid #9d2449;
+  margin: 0.5rem 0 2rem 0;
+  width: 100%;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 0.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: #333;
+  background-color: #fff;
+}
+
+.form-group input::placeholder {
+  color: #999;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #9d2449;
+  box-shadow: 0 0 0 2px rgba(157, 36, 73, 0.1);
+}
+
+.input-error {
+  border-color: #dc3545 !important;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.modal-buttons button {
+  padding: 0.75rem 2.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-guardar {
+  background-color: #9d2449;
+  color: white;
+}
+
+.btn-guardar:hover {
+  background-color: #7a1c38;
+}
+
+.btn-cancelar {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background-color: #5a6268;
+}
+
+/* Estilos para el Modal de Búsqueda */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  padding: 0.5rem;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+.modal-busqueda {
+  max-width: 500px;
+}
+
+.form-busqueda {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.modal-resultado {
+  max-width: 900px;
+}
+
+.busqueda-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ddd;
+}
+
+.btn-volver {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-volver:hover {
+  color: #333;
+}
+
+.flecha-back {
+  font-size: 1.2rem;
+}
+
+.btn-eliminar {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-right: 1rem;
+}
+
+.btn-eliminar:hover {
+  background-color: #c82333;
+}
+
+.btn-editar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-editar:hover {
+  background-color: #0056b3;
+}
+
+.btn-buscar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-buscar:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para inputs deshabilitados en el resultado */
+.modal-resultado input[readonly],
+.modal-resultado select[disabled] {
+  background-color: #f8f9fa;
+  color: #495057;
+  cursor: not-allowed;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .productos-admin-container {
+    padding: 1rem;
+  }
+
+  .productos-acciones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-accion {
+    width: 100%;
+  }
+
+  .productos-content {
+    padding: 1rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+    width: 95%;
+    margin: 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .modal-buttons {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .modal-buttons button {
+    width: 100%;
+    padding: 0.75rem;
+  }
+}

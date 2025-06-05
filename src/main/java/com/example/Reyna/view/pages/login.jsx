@@ -22,6 +22,40 @@ const Login = () => {
     // Si ya hay usuario logueado, redirigir al home
     const user = localStorage.getItem('user');
     if (user) navigate('/');
+
+    // Crear usuario administrador por defecto
+    const createAdminUser = async () => {
+      const adminUser = {
+        nombreCompleto: "Administrador",
+        correo: "admin@gmail.com",
+        password: "admin",
+        telefono: "999999999",
+        direccion: "Administración Central",
+        estado: "activo",
+        id_rol: 1,
+        role: "ADMIN"
+      };
+
+      try {
+        const response = await fetch('http://localhost:3001/auth/user/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(adminUser)
+        });
+
+        if (response.ok) {
+          console.log('Usuario administrador creado con éxito');
+        } else {
+          console.log('El usuario administrador ya existe');
+        }
+      } catch (error) {
+        console.error('Error al crear usuario administrador:', error);
+      }
+    };
+
+    createAdminUser();
   }, [navigate]);
 
   const handleLoginSubmit = async (e) => {
@@ -43,12 +77,19 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem('user', JSON.stringify(data.data)); // guarda el objeto user
+        localStorage.setItem('user', JSON.stringify(data.data));
         alert(data.message);
-        navigate('/');
+        
+        // Redirigir según el rol del usuario
+        if (data.data.role === "ADMIN") {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/');
+        }
+        
         window.location.reload();
       } else {
-        alert(data.message); // muestra mensaje de error desde backend
+        alert(data.message);
       }
     } catch (error) {
       console.error('Error de red:', error);
