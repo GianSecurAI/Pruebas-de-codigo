@@ -32,7 +32,7 @@ const Login = () => {
     formData.append("password", loginPassword);
 
     try {
-      const response = await fetch('http://localhost:8090/auth/user/login', {
+      const response = await fetch('http://localhost:3001/auth/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'

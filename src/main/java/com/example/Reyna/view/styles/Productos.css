@@ -1,4 +1,24 @@
 /* src/styles/Productos.css */
+/* Estilos globales para la página de productos */
+.page-container-for-fixed-nav {
+  font-family: 'Arial', sans-serif;
+}
+
+.productos-header h1 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.productos-header .lead {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.menu-perfumes h5 {
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
 .productos-header .categorias-principales .categoria-link {
   color: #8c438c; /* Tono morado/magenta similar a la imagen */
   margin-left: 10px; /* Espacio a la izquierda de cada enlace */

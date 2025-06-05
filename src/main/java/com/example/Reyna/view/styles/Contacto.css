@@ -18,9 +18,73 @@
   border: none;
 }
 
+/* Estilos para las tarjetas de contacto */
+.contact-card {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  text-decoration: none;
+}
+
+.contact-card .card {
+  transition: all 0.3s ease;
+  border: none;
+  height: 100%;
+}
+
+.contact-card .bi {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+/* Estilos específicos para cada tipo de tarjeta */
+.contact-card.email-card .card {
+  background: linear-gradient(135deg, #FF4B2B, #FF416C);
+  color: white;
+}
+
+.contact-card.whatsapp-card .card {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+}
+
+.contact-card.instagram-card .card {
+  background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+  color: white;
+}
+
+.contact-card.facebook-card .card {
+  background: linear-gradient(135deg, #3B5998, #2C4A7F);
+  color: white;
+}
+
+/* Estilos para los títulos y textos dentro de las tarjetas */
+.contact-card .card-title {
+  font-weight: bold;
+  margin-top: 1rem;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.contact-card .card-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+}
+
+/* Animación de hover para los iconos */
+.contact-card:hover .bi {
+  transform: scale(1.1);
+}
+
+/* Estilos para el mapa */
 .map-container iframe {
   border: 0;
   border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
-
-/* La clase .page-container-for-fixed-nav ha sido movida a App.css */

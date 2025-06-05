@@ -33,13 +33,12 @@ const ContactoPage = () => {
           </div>
 
           <div className="row justify-content-center mt-5 mb-5">
-            <h5 className="text-center mb-4">O ESCRÍBENOS...</h5>
             <div className="col-md-3 mb-4">
               <a href="mailto:demo@lareyna.com" className="contact-card email-card">
-                <div className="card h-100 border-0 shadow-sm">
+                <div className="card h-100">
                   <div className="card-body text-center py-4">
-                    <i className="bi bi-envelope-fill display-4"></i>
-                    <h5 className="card-title mt-3 mb-3">CORREO</h5>
+                    <i className="bi bi-envelope-fill"></i>
+                    <h5 className="card-title">CORREO</h5>
                     <p className="card-text">demo@lareyna.com</p>
                   </div>
                 </div>
@@ -48,10 +47,10 @@ const ContactoPage = () => {
             
             <div className="col-md-3 mb-4">
               <a href="https://wa.me/34947002963" className="contact-card whatsapp-card" target="_blank" rel="noopener noreferrer">
-                <div className="card h-100 border-0 shadow-sm">
+                <div className="card h-100">
                   <div className="card-body text-center py-4">
-                    <i className="bi bi-whatsapp display-4"></i>
-                    <h5 className="card-title mt-3 mb-3">WHATSAPP</h5>
+                    <i className="bi bi-whatsapp"></i>
+                    <h5 className="card-title">WHATSAPP</h5>
                     <p className="card-text">(+34) 947 002 963</p>
                   </div>
                 </div>
@@ -60,10 +59,10 @@ const ContactoPage = () => {
             
             <div className="col-md-3 mb-4">
               <a href="https://instagram.com/lareyna" className="contact-card instagram-card" target="_blank" rel="noopener noreferrer">
-                <div className="card h-100 border-0 shadow-sm">
+                <div className="card h-100">
                   <div className="card-body text-center py-4">
-                    <i className="bi bi-instagram display-4"></i>
-                    <h5 className="card-title mt-3 mb-3">INSTAGRAM</h5>
+                    <i className="bi bi-instagram"></i>
+                    <h5 className="card-title">INSTAGRAM</h5>
                     <p className="card-text">@lareyna</p>
                   </div>
                 </div>
@@ -72,10 +71,10 @@ const ContactoPage = () => {
             
             <div className="col-md-3 mb-4">
               <a href="https://facebook.com/LaReynaOficial" className="contact-card facebook-card" target="_blank" rel="noopener noreferrer">
-                <div className="card h-100 border-0 shadow-sm">
+                <div className="card h-100">
                   <div className="card-body text-center py-4">
-                    <i className="bi bi-facebook display-4"></i>
-                    <h5 className="card-title mt-3 mb-3">FACEBOOK</h5>
+                    <i className="bi bi-facebook"></i>
+                    <h5 className="card-title">FACEBOOK</h5>
                     <p className="card-text">La Reyna Oficial</p>
                   </div>
                 </div>
@@ -84,22 +83,6 @@ const ContactoPage = () => {
           </div>
         </div>
       </section>
-
-      {/* Map Section */}
-      <div className="container map-container">
-        <div className="row justify-content-center">
-          <div className="col-md-0">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3902.7385441158094!2d-77.06346097931682!3d-11.99258466713817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105ce56884c7ee7%3A0x6d8c6b2207bef24a!2sMegaplaza!5e0!3m2!1ses-419!2spe!4v1746688856578!5m2!1ses-419!2spe"
-              width="100%"
-              height="400"
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
-        </div>
-      </div>
 
       <Footer />
     </div>

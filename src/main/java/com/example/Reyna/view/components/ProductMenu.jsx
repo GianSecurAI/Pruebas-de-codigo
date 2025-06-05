@@ -1,59 +1,37 @@
-import React, { useState } from 'react'; // Importar useState
-import '../styles/ProductMenu.css'; // Importar el archivo CSS
+import React from 'react';
+import '../styles/ProductMenu.css';
 
 const ProductMenu = () => {
   const categories = [
-    { title: 'Marcas', subCategories: ['Esika', 'Cyzone', "L'bel", 'Yanbal', 'Victoria Secret'] },
-    { title: 'Para Mujer', subCategories: ['Eau de Parfum', 'Eau de Toilette', 'Body Mist', 'Colonias', 'Loción Perf.', 'Sets de regalo'] },
-    { title: 'Para Hombre', subCategories: ['Eau de Parfum', 'Eau de Toilette', 'Body Mist', 'Colonias', 'Loción Perf.', 'Sets de regalo'] },
-    { title: 'Ofertas', subCategories: [] }, // Ofertas no tiene subcategorías en la imagen, pero se mantiene por si acaso
+    { title: 'Niños' },
+    { title: 'Adolescentes' },
+    { title: 'Caballeros' },
+    { title: 'Damas' }
   ];
 
-  // Estado para manejar las categorías expandidas
-  const [expandedCategories, setExpandedCategories] = useState({});
-
-  // Función para alternar la expansión de una categoría
-  const toggleCategory = (categoryTitle) => {
-    setExpandedCategories(prev => ({
-      ...prev,
-      [categoryTitle]: !prev[categoryTitle]
-    }));
-  };
-
-  return (
-    <div className="menu-perfumes">
-      <h5>MENÚ - PERFUMES</h5>
+  return (    <div className="menu-perfumes">
+      <h5>Categorías</h5>
       <nav className="nav flex-column">
         {categories.map((category, index) => (
-          <React.Fragment key={category.title}> {/* Usar category.title como key si son únicos */} 
-            <a 
-              className="nav-link category-title"
-              href="#"
-              onClick={(e) => { 
-                e.preventDefault(); 
-                toggleCategory(category.title); 
-              }}
-              aria-expanded={!!expandedCategories[category.title]}
-              aria-controls={`subcategories-${category.title.replace(/\s+/g, '-').toLowerCase()}`}
-            >
-              <span aria-hidden="true" className="category-icon">
-                {expandedCategories[category.title] ? '\u25BC ' : '\u25B6 '}{/* ▼ o ► */}
-              </span>
-              {category.title}
-            </a>
-            {expandedCategories[category.title] && (
-              <div 
-                id={`subcategories-${category.title.replace(/\s+/g, '-').toLowerCase()}`}
-                className="sub-category-container"
-              >
-                {category.subCategories.map((subCategory, subIndex) => (
-                  <a key={subIndex} className="nav-link sub-category" href="#">
-                    {subCategory}
-                  </a>
-                ))}
-              </div>
-            )}
-          </React.Fragment>
+          <a
+            key={category.title}
+            className="nav-link category-title"
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              // Aquí puedes agregar la lógica para filtrar los productos
+              console.log(`Filtrar por ${category.title}`);
+            }}
+            style={{
+              color: '#7B1E7A',
+              padding: '10px 15px',
+              textDecoration: 'none',
+              display: 'block',
+              borderBottom: '1px solid #eee'
+            }}
+          >
+            ▸ {category.title}
+          </a>
         ))}
       </nav>
     </div>

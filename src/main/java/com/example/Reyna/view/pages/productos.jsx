@@ -18,19 +18,12 @@ const ProductsPage = () => {
     <div className="page-container-for-fixed-nav"> {/* Aplicada clase para el Navbar fijo */}
       <Navbar />
       {/* Header de Productos */}
-      <section className="productos-header text-center">
-        <div className="container">
-          <h1>NUESTROS PRODUCTOS</h1>
+      <section className="productos-header text-center">        <div className="container">
+          <h1>Nuestros Productos</h1>
           <p className="lead">
-            NUESTROS PRODUCTOS DE BELLEZA DE RECONOCIDA CALIDAD MARCAN TENDENCIA EN COSMÉTICA, PERFUMERÍA Y JOYERÍA.
-            RESULTADOS PROBADOS Y FÓRMULAS DE ALTA EFICACIA QUE CUIDAN TU PIEL.
+            Nuestros productos de belleza de reconocida calidad marcan tendencia en cosmética, perfumería y joyería.
+            Resultados probados y fórmulas de alta eficacia que cuidan tu piel.
           </p>
-          <div className="categorias-principales mt-4">
-            <a href="#" className="categoria-link categoria-perfumes">Perfumes</a>
-            <a href="#" className="categoria-link categoria-facial">Tratamiento Facial</a>
-            <a href="#" className="categoria-link categoria-maquillaje">Maquillaje</a>
-            <a href="#" className="categoria-link categoria-cuidado">Cuidado Personal</a>
-          </div>
         </div>
       </section>
 
