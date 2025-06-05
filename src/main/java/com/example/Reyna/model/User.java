@@ -36,7 +36,7 @@ public class User implements UserDetails {
     String nombreCompleto; // Usamos el nombre en camelCase para la variable
     @Column(name="correo")
     String correo;
-    @Column(name="password")
+    @Column(name="password") // Usamos el password 
     String password;
     @Column(name="telefono")
     String telefono;
