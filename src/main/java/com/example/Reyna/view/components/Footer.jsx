@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/footer.css';
 import logoReyna from '../../../../../../../assets/img/logo-reyna.png';
 import 'bootstrap-icons/font/bootstrap-icons.css';
