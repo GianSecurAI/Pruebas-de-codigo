@@ -3,10 +3,10 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/Nosotros.css'; 
 
-import fondoImg from '../assets/img/fondo.png';
-import compromisoImg from '../assets/img/compromiso-nosotros.png';
-import muestraImg from '../assets/img/muestra.png';
-import aromasImg from '../assets/img/aromas.png';
+import fondoImg from '../../../../../../../assets/img/fondo.png';
+import compromisoImg from '../../../../../../../assets/img/compromiso-nosotros.png';
+import muestraImg from '../../../../../../../assets/img/muestra.png';
+import aromasImg from '../../../../../../../assets/img/aromas.png';
 
 const NosotrosPage = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import bannerPerfume from '../assets/img/banner-perfume.png';
+import bannerPerfume from '../../../../../../../assets/img/banner-perfume.png';
 
 const Carousel = () => {
   return (

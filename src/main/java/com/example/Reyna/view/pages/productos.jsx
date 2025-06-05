@@ -5,12 +5,12 @@ import ProductCard from '../components/ProductCard';
 import ProductMenu from '../components/ProductMenu';
 import Pagination from '../components/Pagination';
 
-import prodFrag1Img from '../assets/img/prod-frag1.png';
-import prodFrag2Img from '../assets/img/prod-frag2.png';
-import prodFrag3Img from '../assets/img/prod-frag3.png';
-import prodFrag4Img from '../assets/img/prod-frag4.jpg';
-import prodFrag5Img from '../assets/img/prod-frag5.jpg';
-import prodFrag6Img from '../assets/img/prod-frag6.png';
+import prodFrag1Img from '../../../../../../../assets/img/prod-frag1.png';
+import prodFrag2Img from '../../../../../../../assets/img/prod-frag2.png';
+import prodFrag3Img from '../../../../../../../assets/img/prod-frag3.png';
+import prodFrag4Img from '../../../../../../../assets/img/prod-frag4.jpg';
+import prodFrag5Img from '../../../../../../../assets/img/prod-frag5.jpg';
+import prodFrag6Img from '../../../../../../../assets/img/prod-frag6.png';
 import '../styles/Productos.css'; // Importar el CSS para la página de productos
 
 const ProductsPage = () => {

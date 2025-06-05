@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProductDetail from '../components/ProductDetail';
-import prodFrag1Img from '../assets/img/prod-frag1.png';
-import prodFrag2Img from '../assets/img/prod-frag2.png';
-import prodFrag3Img from '../assets/img/prod-frag3.png';
-import prodFrag4Img from '../assets/img/prod-frag4.jpg';
-import prodFrag5Img from '../assets/img/prod-frag5.jpg';
-import prodFrag6Img from '../assets/img/prod-frag6.png';
+import prodFrag1Img from '../../../../../../../assets/img/prod-frag1.png';
+import prodFrag2Img from '../../../../../../../assets/img/prod-frag2.png';
+import prodFrag3Img from '../../../../../../../assets/img/prod-frag3.png';
+import prodFrag4Img from '../../../../../../../assets/img/prod-frag4.jpg';
+import prodFrag5Img from '../../../../../../../assets/img/prod-frag5.jpg';
+import prodFrag6Img from '../../../../../../../assets/img/prod-frag6.png';
 
 const ProductoPage = () => {
   const { id } = useParams();

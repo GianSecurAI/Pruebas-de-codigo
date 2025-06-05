@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import tituloLaReyna from '../assets/img/titulo-lareyna.png';
+import tituloLaReyna from '../../../../../../../assets/img/titulo-lareyna.png';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../styles/Navbar.css'; 
 

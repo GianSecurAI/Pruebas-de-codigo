@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Home from './pages/home.jsx';
-import ProductsPage from './pages/productos.jsx';
-import NosotrosPage from './pages/nosotros.jsx';
-import ContactoPage from './pages/contacto.jsx';
-import ProductoPage from './pages/productopage.jsx'; // Importar ProductoPage
-import Login from './pages/login.jsx'; // Importar Login
-import CarritoPage from './pages/carrito.jsx'; // Importar CarritoPage
+import Home from './main/java/com/example/Reyna/view/pages/home.jsx';
+import ProductsPage from './main/java/com/example/Reyna/view/pages/productos.jsx';
+import NosotrosPage from './main/java/com/example/Reyna/view/pages/nosotros.jsx';
+import ContactoPage from './main/java/com/example/Reyna/view/pages/contacto.jsx';
+import ProductoPage from './main/java/com/example/Reyna/view/pages/productopage.jsx'; // Importar ProductoPage
+import Login from './main/java/com/example/Reyna/view/pages/login.jsx'; // Importar Login
+import CarritoPage from './main/java/com/example/Reyna/view/pages/carrito.jsx'; // Importar CarritoPage
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {

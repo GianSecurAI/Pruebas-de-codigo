@@ -8,15 +8,15 @@ import Footer from '../components/Footer';
 import '../styles/Home.css'; // Importar Home.css
 
 // Importar imágenes desde src/assets/img
-import categoriaFraganciasImg from '../assets/img/categoria-fragancias.png';
-import categoriaTratamientosImg from '../assets/img/categoria-tratamientos.png';
-import categoriaMaquillajeImg from '../assets/img/categoria-maquillaje.png';
-import categoriaCuidadoImg from '../assets/img/categoria-cuidado.png';
-import prodFrag1Img from '../assets/img/prod-frag1.png';
+import categoriaFraganciasImg from '../../../../../../../assets/img/categoria-fragancias.png';
+import categoriaTratamientosImg from '../../../../../../../assets/img/categoria-tratamientos.png';
+import categoriaMaquillajeImg from '../../../../../../../assets/img/categoria-maquillaje.png';
+import categoriaCuidadoImg from '../../../../../../../assets/img/categoria-cuidado.png';
+import prodFrag1Img from '../../../../../../../assets/img/prod-frag1.png';
 // Si hay otras imágenes de productos, importarlas también. Ejemplo:
-// import prodFrag2Img from '../assets/img/prod-frag2.png';
-import promoRegaloBgImg from '../assets/img/promo-regalo.png';
-import promoDescuentoBgImg from '../assets/img/promo-descuento.png';
+// import prodFrag2Img from '../../../../../../../assets/img/prod-frag2.png';
+import promoRegaloBgImg from '../../../../../../../assets/img/promo-regalo.png';
+import promoDescuentoBgImg from '../../../../../../../assets/img/promo-descuento.png';
 
 const Home = () => {
   return (
