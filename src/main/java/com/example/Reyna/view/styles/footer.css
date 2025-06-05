@@ -36,3 +36,93 @@
 .footer-copyright {
   color: #a05b8e;
 }
+
+/* Estilos para los modales */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1100; /* Mayor que el navbar */
+  padding-top: 50px;
+  overflow-y: auto;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 0;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  margin-bottom: 50px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #e9baba;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.modal-header h2 {
+  color: #7d3c6e;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #7d3c6e;
+  cursor: pointer;
+  padding: 0;
+}
+
+.modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  max-height: calc(85vh - 60px); /* 60px es la altura aproximada del header */
+}
+
+.modal-body h4 {
+  color: #7d3c6e;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.modal-body h5 {
+  color: #a05b8e;
+  font-size: 1rem;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.modal-body p, .modal-body li {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.modal-body ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.policy-modal .modal-body, .terms-modal .modal-body {
+  text-align: left;
+}
