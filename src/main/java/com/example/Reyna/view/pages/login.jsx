@@ -78,6 +78,7 @@ const Login = () => {
 
       if (response.ok) {
         localStorage.setItem('user', JSON.stringify(data.data));
+        localStorage.setItem('token', data.token);
         alert(data.message);
         
         // Redirigir según el rol del usuario

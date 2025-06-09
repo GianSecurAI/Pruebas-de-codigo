@@ -109,3 +109,16 @@ CREATE TABLE Contacto (
     estado_respuesta VARCHAR(20) DEFAULT 'Pendiente',
     FOREIGN KEY (id_cliente) REFERENCES Usuario(id_usuario)
 );
+INSERT INTO Categoria (nombre_categoria) VALUES
+('Perfumes'),
+('Maquillaje'),
+('Cremas'),
+('Joyas');
+INSERT INTO Producto (nombre_producto, descripcion, precio, stock, id_categoria)
+VALUES
+('Set Ccori Rosé: Parfum + Loción Perfumada', 'Set de perfume y loción con aroma floral.', 119.00, 10, 1),
+('Cielo en Rosa Eau de Parfum', 'Fragancia femenina con notas frescas y florales.', 113.00, 15, 1),
+('Set Sauvage Dior: Parfum + Estuche Elegante', 'Set masculino con estuche de regalo.', 105.00, 8, 1),
+('Bombshell Seduction Eau de Parfum', 'Perfume seductor y elegante.', 180.00, 5, 1),
+('Una Instinct Eau de Parfum', 'Fragancia intensa y duradera.', 165.00, 12, 1),
+('Fragancia Intensa para Hombre', 'Perfume masculino de larga duración.', 150.00, 20, 1);

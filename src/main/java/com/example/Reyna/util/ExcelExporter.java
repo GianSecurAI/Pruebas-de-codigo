@@ -3,6 +3,7 @@ package com.example.Reyna.util;
 import com.example.Reyna.model.User;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import com.example.Reyna.model.Producto;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,6 +11,29 @@ import java.io.IOException;
 import java.util.List;
 
 public class ExcelExporter {
+    public static ByteArrayInputStream productosToExcel(List<Producto> productos) throws IOException {
+    String[] columns = {"ID", "Nombre", "Categoría", "Precio"};
+    try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+        Sheet sheet = workbook.createSheet("Productos");
+        Row headerRow = sheet.createRow(0);
+
+        for (int col = 0; col < columns.length; col++) {
+            Cell cell = headerRow.createCell(col);
+            cell.setCellValue(columns[col]);
+        }
+
+        int rowIdx = 1;
+        for (Producto producto : productos) {
+            Row row = sheet.createRow(rowIdx++);
+            row.createCell(0).setCellValue(producto.getId_producto());
+            row.createCell(1).setCellValue(producto.getNombre_producto());
+            row.createCell(2).setCellValue(producto.getCategoria());
+            row.createCell(3).setCellValue(producto.getPrecio());
+        }
+        workbook.write(out);
+        return new ByteArrayInputStream(out.toByteArray());
+    }
+}
 
     public static ByteArrayInputStream usersToExcel(List<User> users) throws IOException {
         String[] columns = {"ID", "Nombre Completo", "Correo", "Teléfono", "Dirección"};
@@ -38,5 +62,6 @@ public class ExcelExporter {
             return new ByteArrayInputStream(out.toByteArray());
         }
     }
+    
 }
 

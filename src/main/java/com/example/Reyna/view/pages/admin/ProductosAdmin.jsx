@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import '../../styles/ProductosAdmin.css';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 const ProductosAdmin = () => {
   const navigate = useNavigate();
@@ -45,7 +47,27 @@ const ProductosAdmin = () => {
       setProductosFiltrados(productos.filter(p => p.categoria === categoriaSeleccionada));
     }
   }, [categoriaSeleccionada, productos]);
-
+const cargarProductos = async () => {
+  try {
+    const response = await fetch('http://localhost:3001/api/productos');
+    if (!response.ok) {
+      // Aquí puedes mostrar un mensaje personalizado según el código de error
+      if (response.status === 403) {
+        throw new Error('No tienes permisos para ver los productos (403 Forbidden)');
+      } else if (response.status === 404) {
+        throw new Error('No se encontró el recurso (404 Not Found)');
+      } else {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
+    }
+    const data = await response.json();
+    setProductos(data);
+  } catch (error) {
+    // Aquí puedes mostrar el error en la UI o en consola
+    console.error('Error al cargar productos:', error.message);
+    alert(error.message); // Opcional: muestra el error al usuario
+  }
+};
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNuevoProducto(prev => ({
@@ -99,18 +121,30 @@ const ProductosAdmin = () => {
     return Object.keys(nuevosErrores).length === 0;
   };
 
-  const handleGuardarProducto = () => {
-    if (validarFormulario()) {
-      const nuevoProductoFormateado = {
-        id: nuevoProducto.codigo,
-        nombre: nuevoProducto.nombre,
-        categoria: nuevoProducto.categoria,
-        marca: nuevoProducto.marca,
-        sexo: nuevoProducto.sexo,
-        precio: Number(nuevoProducto.precio)
-      };
+const handleGuardarProducto = async () => {
+  if (validarFormulario()) {
+    const nuevoProductoFormateado = {
+      nombre_producto: nuevoProducto.nombre,
+      descripcion: nuevoProducto.descripcion || '',
+      precio: Number(nuevoProducto.precio),
+      stock: Number(nuevoProducto.stock) || 0,
+      id_categoria: categorias.findIndex(cat => cat === nuevoProducto.categoria),
+      estado: true
+    };
 
-      setProductos(prevProductos => [...prevProductos, nuevoProductoFormateado]);
+    try {
+      const token = localStorage.getItem('token'); // <-- agrega esta línea antes del fetch
+      const response = await fetch('http://localhost:3001/api/productos', {
+       method: 'POST',
+       headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // <-- agrega esta línea
+  },
+  body: JSON.stringify(nuevoProducto)
+});
+      if (!response.ok) throw new Error('Error al guardar el producto');
+      // Recarga productos desde el backend
+      await cargarProductos();
       setMostrarModal(false);
       setNuevoProducto({
         nombre: '',
@@ -121,8 +155,11 @@ const ProductosAdmin = () => {
         codigo: ''
       });
       setErrores({});
+    } catch (error) {
+      alert('No se pudo guardar el producto');
     }
-  };
+  }
+};
 
   const handleBuscarClick = () => {
     setMostrarModalBusqueda(true);
@@ -161,6 +198,20 @@ const ProductosAdmin = () => {
   const handleSalir = () => {
     navigate('/admin/dashboard');
   };
+  const exportarExcel = () => {
+    const data = productosFiltrados.map(({ id, nombre, categoria, precio }) => ({
+      Código: id,
+      Producto: nombre,
+      Categoría: categoria,
+      Precio: precio
+    }));
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Productos');
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(blob, 'productos.xlsx');
+  };
 
   return (
     <div className="page-container-for-fixed-nav">
@@ -173,7 +224,6 @@ const ProductosAdmin = () => {
           <div className="productos-acciones">
             <button className="btn-accion btn-agregar" onClick={handleAgregarClick}>AGREGAR PRODUCTO</button>
             <button className="btn-accion btn-buscar" onClick={handleBuscarClick}>BUSCAR PRODUCTO</button>
-            <button className="btn-accion btn-guardar">GUARDAR CAMBIOS</button>
             <button className="btn-accion btn-salir" onClick={handleSalir}>SALIR</button>
           </div>
         </div>
@@ -406,6 +456,14 @@ const ProductosAdmin = () => {
                 <option key={cat} value={cat}>{cat}</option>
               ))}
             </select>
+            {/* Aquí va el botón */}
+            <button 
+              className="btn-accion btn-agregar" 
+              style={{marginLeft: '1rem'}} 
+              onClick={exportarExcel}
+            >
+              Exportar a Excel
+            </button>
           </div>
 
           <div className="productos-tabla">
