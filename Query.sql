@@ -57,7 +57,7 @@ CREATE TABLE Producto_Proveedor (
 CREATE TABLE Pedido (
     id_pedido Bigserial PRIMARY KEY,
     id_cliente INT NOT NULL,
-    fecha_pedido DATETIME DEFAULT NOW(),
+    fecha_pedido TIMESTAMP DEFAULT NOW(),
     estado_pedido VARCHAR(50) DEFAULT 'Pendiente',
     total DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (id_cliente) REFERENCES Usuario(id_usuario)
@@ -80,7 +80,7 @@ CREATE TABLE Venta (
     id_venta Bigserial PRIMARY KEY,
     id_vendedor INT NOT NULL,
     id_cliente INT NOT NULL,
-    fecha_venta DATETIME DEFAULT NOW(),
+    fecha_venta TIMESTAMP DEFAULT NOW(),
     total DECIMAL(10, 2) NOT NULL,
     tipo_comprobante VARCHAR(50),
     FOREIGN KEY (id_vendedor) REFERENCES Usuario(id_usuario),
@@ -105,7 +105,7 @@ CREATE TABLE Contacto (
     id_cliente INT NOT NULL,
     asunto VARCHAR(100),
     mensaje TEXT NOT NULL,
-    fecha DATETIME DEFAULT NOW(),
+    fecha TIMESTAMP DEFAULT NOW(),
     estado_respuesta VARCHAR(20) DEFAULT 'Pendiente',
     FOREIGN KEY (id_cliente) REFERENCES Usuario(id_usuario)
 );
