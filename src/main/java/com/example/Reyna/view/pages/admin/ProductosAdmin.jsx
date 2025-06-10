@@ -7,14 +7,19 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 
 const ProductosAdmin = () => {
-  const navigate = useNavigate();
-  const [productos, setProductos] = useState([
+  const navigate = useNavigate();  const [productos, setProductos] = useState([
     { id: 'P001', nombre: 'Set Ccori Rosé: Parfum + Loción Perfumada', categoria: 'Perfumes', precio: 119 },
     { id: 'P002', nombre: 'Cielo en Rosa Eau de Parfum', categoria: 'Perfumes', precio: 113 },
     { id: 'P003', nombre: 'Set Sauvage Dior: Parfum + Estuche Elegante', categoria: 'Perfumes', precio: 105 },
     { id: 'P004', nombre: 'Bombshell Seduction Eau de Parfum', categoria: 'Perfumes', precio: 180 },
     { id: 'P005', nombre: 'Una Instinct Eau de Parfum', categoria: 'Perfumes', precio: 165 },
-    { id: 'P006', nombre: 'Fragancia Intensa para Hombre', categoria: 'Perfumes', precio: 150 }
+    { id: 'P006', nombre: 'Fragancia Intensa para Hombre', categoria: 'Perfumes', precio: 150 },
+    { id: 'P007', nombre: 'Euforia Floral Collection', categoria: 'Perfumes', precio: 145 },
+    { id: 'P008', nombre: 'Set Elegance: Perfume + Body Lotion', categoria: 'Perfumes', precio: 135 },
+    { id: 'P009', nombre: 'Midnight Dreams Eau de Parfum', categoria: 'Perfumes', precio: 190 },
+    { id: 'P010', nombre: 'Sweet Garden Collection', categoria: 'Perfumes', precio: 170 },
+    { id: 'P011', nombre: 'Ocean Breeze For Men', categoria: 'Perfumes', precio: 155 },
+    { id: 'P012', nombre: 'Diamond Rose Limited Edition', categoria: 'Perfumes', precio: 210 }
   ]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todos');
   const [productosFiltrados, setProductosFiltrados] = useState(productos);
