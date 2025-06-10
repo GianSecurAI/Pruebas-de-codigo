@@ -7,14 +7,24 @@
 
 .productos-header {
   margin-bottom: 2rem;
-  text-align: center;
+  background-size: cover;
+  background-position: center;
+  text-align: left;
 }
 
 .productos-header h1 {
   color: #333;
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 300;
   margin-bottom: 2rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.productos-header hr {
+  width: 350px;
+  height: 2px;
+  background-color: #f5177e;
+  border: none;
 }
 
 .productos-acciones {

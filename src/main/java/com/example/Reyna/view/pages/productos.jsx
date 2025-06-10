@@ -11,6 +11,7 @@ import prodFrag3Img from '../../../../../../../assets/img/prod-frag3.png';
 import prodFrag4Img from '../../../../../../../assets/img/prod-frag4.jpg';
 import prodFrag5Img from '../../../../../../../assets/img/prod-frag5.jpg';
 import prodFrag6Img from '../../../../../../../assets/img/prod-frag6.png';
+import fondoImg from '../../../../../../../assets/img/fondo.png';
 import '../styles/Productos.css'; // Importar el CSS para la página de productos
 
 const ProductsPage = () => {
@@ -18,12 +19,15 @@ const ProductsPage = () => {
     <div className="page-container-for-fixed-nav"> {/* Aplicada clase para el Navbar fijo */}
       <Navbar />
       {/* Header de Productos */}
-      <section className="productos-header text-center">        <div className="container">
-          <h1>Nuestros Productos</h1>
-          <p className="lead">
-            Nuestros productos de belleza de reconocida calidad marcan tendencia en cosmética, perfumería y joyería.
-            Resultados probados y fórmulas de alta eficacia que cuidan tu piel.
-          </p>
+      <section className="productos-header text-center py-5" 
+              style={{
+                  backgroundImage: `url(${fondoImg})`,
+                }}>        
+                <div className="container py-5">
+          <div className="d-flex align-items-center" style={{ marginLeft: '15%' }}>
+            <h1 className="mb-0 me-5">NUESTROS PRODUCTOS</h1>
+            <hr />
+          </div>
         </div>
       </section>
 
