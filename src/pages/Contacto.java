@@ -1612,7 +1612,7 @@ public class Contacto {
             if (email == null) {
                 return false;
             }
-            String regex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$";
+            String regex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-ZaZ]{2,})$";
             return email.matches(regex);
         }
         
@@ -1894,693 +1894,985 @@ public class Contacto {
     }
     
     /**
-     * Clase para demostrar algoritmos de procesamiento de imágenes básicos
-     * (Simulación sin usar bibliotecas externas)
+     * Clase para demostrar algoritmos de grafos avanzados.
+     * Utiliza representaciones de matriz de adyacencia y lista de adyacencia.
      */
-    public static class ProcesadoImagenes {
-        
+    public static class AlgoritmosGrafosAvanzados {
+
+        private static final int INF = Integer.MAX_VALUE;
+
         /**
-         * Representa una imagen como una matriz de enteros (simulación)
+         * Representa una arista en un grafo ponderado.
          */
-        public static class Imagen {
-            private int[][] pixeles;
-            private int ancho;
-            private int alto;
-            
-            /**
-             * Constructor para crear una imagen en blanco
-             * 
-             * @param ancho Ancho de la imagen
-             * @param alto Alto de la imagen
-             */
-            public Imagen(int ancho, int alto) {
-                this.ancho = ancho;
-                this.alto = alto;
-                this.pixeles = new int[alto][ancho];
+        public static class Arista implements Comparable<Arista> {
+            int origen, destino, peso;
+
+            public Arista(int origen, int destino, int peso) {
+                this.origen = origen;
+                this.destino = destino;
+                this.peso = peso;
             }
-            
-            /**
-             * Constructor para crear una imagen con datos existentes
-             * 
-             * @param pixeles Matriz de pixeles
-             */
-            public Imagen(int[][] pixeles) {
-                this.pixeles = pixeles;
-                this.alto = pixeles.length;
-                this.ancho = pixeles[0].length;
+
+            @Override
+            public int compareTo(Arista otra) {
+                return this.peso - otra.peso;
             }
-            
-            /**
-             * Obtiene el valor de un pixel
-             * 
-             * @param x Coordenada x
-             * @param y Coordenada y
-             * @return Valor del pixel
-             */
-            public int getPixel(int x, int y) {
-                if (x < 0 || x >= ancho || y < 0 || y >= alto) {
-                    return 0;
-                }
-                return pixeles[y][x];
-            }
-            
-            /**
-             * Establece el valor de un pixel
-             * 
-             * @param x Coordenada x
-             * @param y Coordenada y
-             * @param valor Valor del pixel
-             */
-            public void setPixel(int x, int y, int valor) {
-                if (x >= 0 && x < ancho && y >= 0 && y < alto) {
-                    pixeles[y][x] = valor;
-                }
-            }
-            
-            /**
-             * Obtiene el ancho de la imagen
-             * 
-             * @return Ancho
-             */
-            public int getAncho() {
-                return ancho;
-            }
-            
-            /**
-             * Obtiene el alto de la imagen
-             * 
-             * @return Alto
-             */
-            public int getAlto() {
-                return alto;
-            }
-            
-            /**
-             * Obtiene la matriz de pixeles
-             * 
-             * @return Matriz de pixeles
-             */
-            public int[][] getPixeles() {
-                return pixeles;
+
+            @Override
+            public String toString() {
+                return String.format("(%d --%d--> %d)", origen, peso, destino);
             }
         }
-        
+
         /**
-         * Aplica un filtro de escala de grises a una imagen
-         * 
-         * @param imagen Imagen original (RGB)
-         * @return Nueva imagen en escala de grises
+         * Implementación del algoritmo de Dijkstra para encontrar el camino más corto
+         * desde un nodo fuente a todos los demás nodos en un grafo ponderado.
+         *
+         * @param grafo Matriz de adyacencia del grafo (grafo[i][j] = peso, INF si no hay arista).
+         * @param fuente Nodo de inicio.
+         * @return Array con las distancias más cortas desde la fuente.
          */
-        public static Imagen escalaGrises(Imagen imagen) {
-            int ancho = imagen.getAncho();
-            int alto = imagen.getAlto();
-            Imagen resultado = new Imagen(ancho, alto);
-            
-            for (int y = 0; y < alto; y++) {
-                for (int x = 0; x < ancho; x++) {
-                    int rgb = imagen.getPixel(x, y);
-                    
-                    int r = (rgb >> 16) & 0xFF;
-                    int g = (rgb >> 8) & 0xFF;
-                    int b = rgb & 0xFF;
-                    
-                    // Fórmula estándar para escala de grises
-                    int gris = (int) (0.299 * r + 0.587 * g + 0.114 * b);
-                    
-                    // Crear nuevo valor RGB con todos los canales iguales
-                    int nuevoRgb = (gris << 16) | (gris << 8) | gris;
-                    
-                    resultado.setPixel(x, y, nuevoRgb);
+        public static int[] dijkstra(int[][] grafo, int fuente) {
+            int V = grafo.length;
+            int[] distancias = new int[V];
+            boolean[] visitados = new boolean[V];
+
+            java.util.Arrays.fill(distancias, INF);
+            distancias[fuente] = 0;
+
+            for (int count = 0; count < V - 1; count++) {
+                int u = minDistancia(distancias, visitados, V);
+                if (u == -1) break; // No hay más nodos alcanzables
+
+                visitados[u] = true;
+
+                for (int v = 0; v < V; v++) {
+                    if (!visitados[v] && grafo[u][v] != 0 && grafo[u][v] != INF &&
+                        distancias[u] != INF && distancias[u] + grafo[u][v] < distancias[v]) {
+                        distancias[v] = distancias[u] + grafo[u][v];
+                    }
                 }
             }
-            
-            return resultado;
+            return distancias;
         }
-        
+
+        private static int minDistancia(int[] distancias, boolean[] visitados, int V) {
+            int min = INF, minIndex = -1;
+            for (int v = 0; v < V; v++) {
+                if (!visitados[v] && distancias[v] <= min) {
+                    min = distancias[v];
+                    minIndex = v;
+                }
+            }
+            return minIndex;
+        }
+
         /**
-         * Aplica un filtro de blur (desenfoque) a una imagen
-         * 
-         * @param imagen Imagen original
-         * @param radio Radio del blur
-         * @return Nueva imagen con blur aplicado
+         * Implementación del algoritmo de Floyd-Warshall para encontrar los caminos más cortos
+         * entre todos los pares de nodos en un grafo ponderado.
+         *
+         * @param grafo Matriz de adyacencia del grafo.
+         * @return Matriz con las distancias más cortas entre todos los pares de nodos.
          */
-        public static Imagen aplicarBlur(Imagen imagen, int radio) {
-            int ancho = imagen.getAncho();
-            int alto = imagen.getAlto();
-            Imagen resultado = new Imagen(ancho, alto);
-            
-            for (int y = 0; y < alto; y++) {
-                for (int x = 0; x < ancho; x++) {
-                    int sumaR = 0;
-                    int sumaG = 0;
-                    int sumaB = 0;
-                    int contador = 0;
-                    
-                    for (int ky = -radio; ky <= radio; ky++) {
-                        for (int kx = -radio; kx <= radio; kx++) {
-                            int nx = x + kx;
-                            int ny = y + ky;
-                            
-                            if (nx >= 0 && nx < ancho && ny >= 0 && ny < alto) {
-                                int rgb = imagen.getPixel(nx, ny);
-                                
-                                int r = (rgb >> 16) & 0xFF;
-                                int g = (rgb >> 8) & 0xFF;
-                                int b = rgb & 0xFF;
-                                
-                                sumaR += r;
-                                sumaG += g;
-                                sumaB += b;
-                                contador++;
-                            }
+        public static int[][] floydWarshall(int[][] grafo) {
+            int V = grafo.length;
+            int[][] distancias = new int[V][V];
+
+            for (int i = 0; i < V; i++) {
+                for (int j = 0; j < V; j++) {
+                    distancias[i][j] = grafo[i][j];
+                     if (i == j) distancias[i][j] = 0; // Distancia a sí mismo es 0
+                }
+            }
+
+            for (int k = 0; k < V; k++) {
+                for (int i = 0; i < V; i++) {
+                    for (int j = 0; j < V; j++) {
+                        if (distancias[i][k] != INF && distancias[k][j] != INF &&
+                            distancias[i][k] + distancias[k][j] < distancias[i][j]) {
+                            distancias[i][j] = distancias[i][k] + distancias[k][j];
                         }
                     }
-                    
-                    int r = sumaR / contador;
-                    int g = sumaG / contador;
-                    int b = sumaB / contador;
-                    
-                    int nuevoRgb = (r << 16) | (g << 8) | b;
-                    resultado.setPixel(x, y, nuevoRgb);
                 }
             }
-            
-            return resultado;
+            return distancias;
         }
         
         /**
-         * Aplica un filtro de detección de bordes a una imagen
-         * 
-         * @param imagen Imagen original
-         * @return Nueva imagen con bordes detectados
+         * Clase auxiliar para el algoritmo de Prim y Kruskal (Union-Find).
          */
-        public static Imagen detectarBordes(Imagen imagen) {
-            int ancho = imagen.getAncho();
-            int alto = imagen.getAlto();
+        private static class UnionFind {
+            private int[] padre;
+            private int[] rango;
+
+            public UnionFind(int n) {
+                padre = new int[n];
+                rango = new int[n];
+                for (int i = 0; i < n; i++) {
+                    padre[i] = i;
+                    rango[i] = 0;
+                }
+            }
+
+            public int encontrar(int i) {
+                if (padre[i] == i)
+                    return i;
+                return padre[i] = encontrar(padre[i]); // Compresión de caminos
+            }
+
+            public boolean unir(int i, int j) {
+                int raizI = encontrar(i);
+                int raizJ = encontrar(j);
+
+                if (raizI != raizJ) {
+                    // Unión por rango
+                    if (rango[raizI] < rango[raizJ]) {
+                        padre[raizI] = raizJ;
+                    } else if (rango[raizJ] < rango[raizI]) {
+                        padre[raizJ] = raizI;
+                    } else {
+                        padre[raizJ] = raizI;
+                        rango[raizI]++;
+                    }
+                    return true;
+                }
+                return false; // Ya estaban en el mismo conjunto
+            }
+        }
+
+        /**
+         * Implementación del algoritmo de Kruskal para encontrar el Árbol de Recubrimiento Mínimo (MST).
+         *
+         * @param V Número de vértices.
+         * @param aristas Lista de todas las aristas del grafo.
+         * @return Lista de aristas que forman el MST.
+         */
+        public static java.util.List<Arista> kruskalMST(int V, java.util.List<Arista> aristas) {
+            java.util.List<Arista> mst = new java.util.ArrayList<>();
+            java.util.Collections.sort(aristas); // Ordenar aristas por peso
+
+            UnionFind uf = new UnionFind(V);
+            int aristasIncluidas = 0;
+
+            for (Arista arista : aristas) {
+                if (aristasIncluidas == V - 1) break;
+
+                if (uf.unir(arista.origen, arista.destino)) {
+                    mst.add(arista);
+                    aristasIncluidas++;
+                }
+            }
+            return mst;
+        }
+
+        /**
+         * Implementación del algoritmo de Prim para encontrar el Árbol de Recubrimiento Mínimo (MST)
+         * usando una cola de prioridad.
+         *
+         * @param grafoListaAdj Lista de adyacencia del grafo, donde cada elemento es una lista de Arista.
+         *                    El índice de la lista principal es el nodo origen.
+         * @param V Número de vértices.
+         * @return Lista de aristas que forman el MST.
+         */
+        public static java.util.List<Arista> primMST(java.util.List<java.util.List<Arista>> grafoListaAdj, int V) {
+            java.util.List<Arista> mst = new java.util.ArrayList<>();
+            boolean[] enMst = new boolean[V];
+            int[] pesosMinimos = new int[V]; // Peso mínimo para conectar el vértice i al MST
+            Arista[] aristaAlMst = new Arista[V]; // Arista que conecta el vértice i al MST
+
+            java.util.Arrays.fill(pesosMinimos, INF);
             
-            // Primero convertir a escala de grises
-            Imagen gris = escalaGrises(imagen);
-            Imagen resultado = new Imagen(ancho, alto);
-            
-            // Kernel de Sobel para detección de bordes
-            int[][] sobelX = {
-                {-1, 0, 1},
-                {-2, 0, 2},
-                {-1, 0, 1}
-            };
-            
-            int[][] sobelY = {
-                {-1, -2, -1},
-                {0, 0, 0},
-                {1, 2, 1}
-            };
-            
-            for (int y = 1; y < alto - 1; y++) {
-                for (int x = 1; x < ancho - 1; x++) {
-                    int gx = 0;
-                    int gy = 0;
-                    
-                    // Aplicar kernels
-                    for (int ky = -1; ky <= 1; ky++) {
-                        for (int kx = -1; kx <= 1; kx++) {
-                            int pixel = gris.getPixel(x + kx, y + ky) & 0xFF;
-                            
-                            gx += pixel * sobelX[ky + 1][kx + 1];
-                            gy += pixel * sobelY[ky + 1][kx + 1];
+            // Usar una cola de prioridad para seleccionar la arista de menor peso
+            // La cola almacenará pares [peso, vérticeDestino]
+            java.util.PriorityQueue<int[]> pq = new java.util.PriorityQueue<>(java.util.Comparator.comparingInt(a -> a[0]));
+
+            // Empezar desde el vértice 0
+            pesosMinimos[0] = 0;
+            pq.add(new int[]{0, 0}); // {peso, vértice}
+
+            int aristasIncluidas = 0;
+            while (!pq.isEmpty() && aristasIncluidas < V) {
+                int[] actual = pq.poll();
+                int u = actual[1];
+                // int pesoU = actual[0]; // No se usa directamente, pero está en 'actual'
+
+                if (enMst[u]) continue; // Si ya está en el MST, ignorar
+
+                enMst[u] = true;
+                aristasIncluidas++; // Incrementar aquí, ya que el nodo u se añade al MST
+
+                // Si no es el primer nodo y la arista existe, añadirla al MST
+                // El primer nodo (fuente) no tiene una arista "entrante" al MST desde otro nodo del MST.
+                if (aristaAlMst[u] != null) {
+                    mst.add(aristaAlMst[u]);
+                }
+
+                // Explorar vecinos de u
+                if (u < grafoListaAdj.size()) { // Asegurar que u es un índice válido
+                    for (Arista aristaVecina : grafoListaAdj.get(u)) {
+                        int v = aristaVecina.destino;
+                        int pesoArista = aristaVecina.peso;
+
+                        if (!enMst[v] && pesoArista < pesosMinimos[v]) {
+                            pesosMinimos[v] = pesoArista;
+                            aristaAlMst[v] = new Arista(u, v, pesoArista); // Guardar la arista que conecta v
+                            pq.add(new int[]{pesosMinimos[v], v});
                         }
                     }
-                    
-                    // Magnitud del gradiente
-                    int magnitud = (int) Math.sqrt(gx * gx + gy * gy);
-                    
-                    // Limitar a 0-255
-                    magnitud = Math.min(255, Math.max(0, magnitud));
-                    
-                    int valorBorde = (magnitud << 16) | (magnitud << 8) | magnitud;
-                    resultado.setPixel(x, y, valorBorde);
+                }
+            }
+            // Corrección: el bucle debe asegurar que se añadan V-1 aristas para un grafo conectado
+            // o hasta que la cola esté vacía. El contador aristasIncluidas debe reflejar nodos en el MST.
+            // Si el grafo no es conectado, mst.size() será < V-1.
+            return mst;
+        }
+        
+        /**
+         * Método de ejemplo para demostrar los algoritmos de grafos.
+         */
+        public static void demoGrafosAvanzados() {
+            System.out.println("--- Demo Algoritmos de Grafos Avanzados ---");
+
+            // Ejemplo para Dijkstra y Floyd-Warshall (matriz de adyacencia)
+            int V_dijkstra = 5;
+            int[][] grafoMatriz = {
+                {0, 10, INF, 5, INF},
+                {INF, 0, 1, 2, INF},
+                {INF, INF, 0, INF, 4},
+                {INF, 3, 9, 0, 2},
+                {7, INF, 6, INF, 0}
+            };
+            // Rellenar INF donde no hay conexión directa para Floyd-Warshall si es necesario
+             for (int i = 0; i < V_dijkstra; i++) {
+                for (int j = 0; j < V_dijkstra; j++) {
+                    if (i != j && grafoMatriz[i][j] == 0) grafoMatriz[i][j] = INF;
+                }
+            }
+
+
+            System.out.println("\\nAlgoritmo de Dijkstra (fuente 0):");
+            int[] distDijkstra = dijkstra(grafoMatriz, 0);
+            for (int i = 0; i < V_dijkstra; i++) {
+                System.out.println("Distancia de 0 a " + i + " es " + (distDijkstra[i] == INF ? "INF" : distDijkstra[i]));
+            }
+
+            System.out.println("\\nAlgoritmo de Floyd-Warshall:");
+            int[][] distFloyd = floydWarshall(grafoMatriz);
+            for (int i = 0; i < V_dijkstra; i++) {
+                for (int j = 0; j < V_dijkstra; j++) {
+                    System.out.print((distFloyd[i][j] == INF ? "INF" : distFloyd[i][j]) + "\\t");
+                }
+                System.out.println();
+            }
+
+            // Ejemplo para Kruskal y Prim (lista de aristas y lista de adyacencia)
+            int numVerticesMST = 6;
+            java.util.List<Arista> aristasKruskal = new java.util.ArrayList<>(java.util.Arrays.asList(
+                new Arista(0, 1, 4), new Arista(0, 2, 3),
+                new Arista(1, 2, 1), new Arista(1, 3, 2),
+                new Arista(2, 3, 4), new Arista(3, 4, 2),
+                new Arista(4, 5, 6), new Arista(2, 4, 5) // Arista adicional
+            ));
+
+            System.out.println("\\nAlgoritmo de Kruskal (MST):");
+            java.util.List<Arista> mstKruskal = kruskalMST(numVerticesMST, aristasKruskal);
+            int costoKruskal = 0;
+            for (Arista a : mstKruskal) {
+                System.out.println(a);
+                costoKruskal += a.peso;
+            }
+            System.out.println("Costo total del MST (Kruskal): " + costoKruskal);
+
+            // Crear lista de adyacencia para Prim
+            java.util.List<java.util.List<Arista>> grafoListaAdjPrim = new java.util.ArrayList<>();
+            for (int i = 0; i < numVerticesMST; i++) {
+                grafoListaAdjPrim.add(new java.util.ArrayList<>());
+            }
+            for (Arista a : aristasKruskal) { // Usar las mismas aristas para comparar
+                grafoListaAdjPrim.get(a.origen).add(new Arista(a.origen, a.destino, a.peso));
+                grafoListaAdjPrim.get(a.destino).add(new Arista(a.destino, a.origen, a.peso)); // Grafo no dirigido
+            }
+            
+            System.out.println("\\nAlgoritmo de Prim (MST):");
+            java.util.List<Arista> mstPrim = primMST(grafoListaAdjPrim, numVerticesMST);
+            int costoPrim = 0;
+            for (Arista a : mstPrim) {
+                System.out.println(a);
+                costoPrim += a.peso;
+            }
+            System.out.println("Costo total del MST (Prim): " + costoPrim);
+            System.out.println("--- Fin Demo Algoritmos de Grafos Avanzados ---");
+        }
+    }
+
+    /**
+     * Clase para demostrar algoritmos geométricos básicos.
+     */
+    public static class AlgoritmosGeometricos {
+
+        /**
+         * Representa un punto en un plano 2D.
+         */
+        public static class Punto implements Comparable<Punto> {
+            double x, y;
+
+            public Punto(double x, double y) {
+                this.x = x;
+                this.y = y;
+            }
+
+            @Override
+            public int compareTo(Punto otro) {
+                if (this.y != otro.y) {
+                    return Double.compare(this.y, otro.y);
+                }
+                return Double.compare(this.x, otro.x);
+            }
+
+            @Override
+            public String toString() {
+                return String.format("(%.2f, %.2f)", x, y);
+            }
+            
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+                Punto punto = (Punto) o;
+                return Double.compare(punto.x, x) == 0 && Double.compare(punto.y, y) == 0;
+            }
+
+            @Override
+            public int hashCode() {
+                return java.util.Objects.hash(x, y);
+            }
+        }
+
+        /**
+         * Calcula la orientación de tres puntos ordenados (p, q, r).
+         * @return 0 si son colineales, 1 si es en sentido horario, 2 si es en sentido antihorario.
+         */
+        public static int orientacion(Punto p, Punto q, Punto r) {
+            double val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+            if (Math.abs(val) < 1e-9) return 0; // Colineal (usar epsilon para flotantes)
+            return (val > 0) ? 1 : 2; // Horario o Antihorario
+        }
+
+        /**
+         * Algoritmo de Graham Scan para encontrar la envolvente convexa (Convex Hull) de un conjunto de puntos.
+         * @param puntosEntrada Array de puntos.
+         * @return Lista de puntos que forman la envolvente convexa, ordenados en sentido antihorario.
+         */
+        public static java.util.List<Punto> convexHullGrahamScan(Punto[] puntosEntrada) {
+            if (puntosEntrada == null) return new java.util.ArrayList<>();
+            Punto[] puntos = java.util.Arrays.copyOf(puntosEntrada, puntosEntrada.length);
+            int n = puntos.length;
+
+            if (n < 3) {
+                java.util.Set<Punto> puntosUnicos = new java.util.HashSet<>(java.util.Arrays.asList(puntos));
+                return new java.util.ArrayList<>(puntosUnicos);
+            }
+
+            // Encontrar el punto con la coordenada y más baja (y el x más bajo en caso de empate)
+            Punto p0 = puntos[0];
+            int p0Index = 0;
+            for (int i = 1; i < n; i++) {
+                if (puntos[i].y < p0.y || (puntos[i].y == p0.y && puntos[i].x < p0.x)) {
+                    p0 = puntos[i];
+                    p0Index = i;
                 }
             }
             
-            return resultado;
+            // Intercambiar p0 con el primer elemento para facilitar la ordenación
+            Punto temp = puntos[0];
+            puntos[0] = puntos[p0Index];
+            puntos[p0Index] = temp;
+            
+            final Punto puntoReferencia = puntos[0]; 
+
+            // Ordenar los puntos restantes (desde el índice 1) según el ángulo polar con p0
+            java.util.Arrays.sort(puntos, 1, n, (p1, p2) -> {
+                int o = orientacion(puntoReferencia, p1, p2);
+                if (o == 0) { // Colineales
+                    return (distanciaCuadrada(puntoReferencia, p2) >= distanciaCuadrada(puntoReferencia, p1)) ? -1 : 1;
+                }
+                return (o == 2) ? -1 : 1; // Antihorario viene antes
+            });
+            
+            // Eliminar puntos colineales que están más cerca de p0
+            java.util.List<Punto> puntosFiltrados = new java.util.ArrayList<>();
+            puntosFiltrados.add(puntos[0]);
+            for (int i = 1; i < n; i++) {
+                // Mantener el punto más lejano si son colineales con p0
+                while (i < n - 1 && orientacion(puntoReferencia, puntos[i], puntos[i+1]) == 0) {
+                    i++; 
+                }
+                 if (i < n) puntosFiltrados.add(puntos[i]);
+            }
+
+
+            if (puntosFiltrados.size() < 3) {
+                return puntosFiltrados; 
+            }
+
+            java.util.Stack<Punto> stack = new java.util.Stack<>();
+            stack.push(puntosFiltrados.get(0));
+            stack.push(puntosFiltrados.get(1));
+
+            for (int i = 2; i < puntosFiltrados.size(); i++) {
+                Punto top = stack.pop();
+                while (!stack.isEmpty() && orientacion(stack.peek(), top, puntosFiltrados.get(i)) != 2) { // No antihorario
+                    top = stack.pop();
+                }
+                stack.push(top);
+                stack.push(puntosFiltrados.get(i));
+            }
+            return new java.util.ArrayList<>(stack);
+        }
+        
+        /**
+         * Calcula la distancia euclidiana al cuadrado entre dos puntos.
+         * @param p1 Punto 1.
+         * @param p2 Punto 2.
+         * @return Distancia al cuadrado.
+         */
+        public static double distanciaCuadrada(Punto p1, Punto p2) {
+            return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
+        }
+        
+        /**
+         * Calcula la distancia euclidiana entre dos puntos.
+         * @param p1 Punto 1.
+         * @param p2 Punto 2.
+         * @return Distancia.
+         */
+        public static double distancia(Punto p1, Punto p2) {
+            return Math.sqrt(distanciaCuadrada(p1, p2));
+        }
+
+        /**
+         * Par de puntos más cercanos: Fuerza bruta.
+         * Útil para verificar o para conjuntos pequeños de puntos.
+         * @param puntos Array de puntos.
+         * @return Array con los dos puntos más cercanos y su distancia. Retorna null si hay menos de 2 puntos.
+         */
+        public static Object[] closestPairFuerzaBruta(Punto[] puntos) {
+            if (puntos == null || puntos.length < 2) return null;
+
+            double minDist = Double.POSITIVE_INFINITY;
+            Punto p1Min = null, p2Min = null;
+
+            for (int i = 0; i < puntos.length; i++) {
+                for (int j = i + 1; j < puntos.length; j++) {
+                    double d = distancia(puntos[i], puntos[j]);
+                    if (d < minDist) {
+                        minDist = d;
+                        p1Min = puntos[i];
+                        p2Min = puntos[j];
+                    }
+                }
+            }
+            return new Object[]{p1Min, p2Min, minDist};
+        }
+        
+        // --- Algoritmo del Par de Puntos Más Cercanos (Divide y Vencerás) ---
+        
+        /**
+         * Función principal para encontrar el par de puntos más cercanos usando Divide y Vencerás.
+         * @param puntosEntrada Array de puntos. Debe haber al menos 2 puntos.
+         * @return Array con los dos puntos más cercanos y su distancia.
+         */
+        public static Object[] closestPairDivideYVenceras(Punto[] puntosEntrada) {
+            if (puntosEntrada == null || puntosEntrada.length < 2) {
+                throw new IllegalArgumentException("Se necesitan al menos dos puntos.");
+            }
+            // Crear copias para no modificar los arrays originales
+            Punto[] puntosOrdenadosX = java.util.Arrays.copyOf(puntosEntrada, puntosEntrada.length);
+            java.util.Arrays.sort(puntosOrdenadosX, java.util.Comparator.comparingDouble(p -> p.x));
+
+            Punto[] puntosOrdenadosY = java.util.Arrays.copyOf(puntosEntrada, puntosEntrada.length);
+            java.util.Arrays.sort(puntosOrdenadosY, java.util.Comparator.comparingDouble(p -> p.y));
+
+
+            return closestPairRec(puntosOrdenadosX, puntosOrdenadosY);
+        }
+
+        private static Object[] closestPairRec(Punto[] Px, Punto[] Py) {
+            int n = Px.length;
+            if (n <= 3) {
+                return closestPairFuerzaBruta(Px); // Para pocos puntos, usar fuerza bruta
+            }
+
+            int mid = n / 2;
+            Punto puntoMedio = Px[mid-1]; // Px[mid-1] es el último de la parte izquierda
+
+            // Dividir Px en Px_izq y Px_der
+            Punto[] Px_izq = java.util.Arrays.copyOfRange(Px, 0, mid);
+            Punto[] Px_der = java.util.Arrays.copyOfRange(Px, mid, n);
+
+            // Dividir Py en Py_izq y Py_der basado en puntoMedio.x
+            // Esto es crucial y debe hacerse eficientemente.
+            java.util.List<Punto> pylList = new java.util.ArrayList<>();
+            java.util.List<Punto> pyrList = new java.util.ArrayList<>();
+            for (Punto p : Py) {
+                if (p.x <= puntoMedio.x) { // Incluir puntos en la línea vertical en la izquierda
+                    pylList.add(p);
+                } else {
+                    pyrList.add(p);
+                }
+            }
+            Punto[] Py_izq = pylList.toArray(new Punto[0]);
+            Punto[] Py_der = pyrList.toArray(new Punto[0]);
+
+
+            Object[] resIzqObj = closestPairRec(Px_izq, Py_izq);
+            Object[] resDerObj = closestPairRec(Px_der, Py_der);
+            
+            double delta;
+            Punto p1Min, p2Min;
+
+            if ((Double)resIzqObj[2] < (Double)resDerObj[2]) {
+                delta = (Double)resIzqObj[2];
+                p1Min = (Punto)resIzqObj[0];
+                p2Min = (Punto)resIzqObj[1];
+            } else {
+                delta = (Double)resDerObj[2];
+                p1Min = (Punto)resDerObj[0];
+                p2Min = (Punto)resDerObj[1];
+            }
+            
+            // Crear la franja de puntos (puntos en Py cuya distancia x a puntoMedio.x es menor que delta)
+            java.util.List<Punto> franja = new java.util.ArrayList<>();
+            for (Punto p : Py) {
+                if (Math.abs(p.x - puntoMedio.x) < delta) {
+                    franja.add(p);
+                }
+            }
+
+            // Encontrar el mínimo en la franja (ya están ordenados por Y en 'franja' debido a Py)
+            for (int i = 0; i < franja.size(); i++) {
+                // Solo comparar con los siguientes 7 puntos (aproximadamente) en la franja
+                for (int j = i + 1; j < franja.size() && (franja.get(j).y - franja.get(i).y) < delta; j++) {
+                    double d = distancia(franja.get(i), franja.get(j));
+                    if (d < delta) {
+                        delta = d;
+                        p1Min = franja.get(i);
+                        p2Min = franja.get(j);
+                    }
+                }
+            }
+            return new Object[]{p1Min, p2Min, delta};
+        }
+
+
+        /**
+         * Método de ejemplo para demostrar los algoritmos geométricos.
+         */
+        public static void demoGeometricos() {
+            System.out.println("\\n--- Demo Algoritmos Geométricos ---");
+
+            Punto[] puntosConvexHull = {
+                new Punto(0, 3), new Punto(1, 1), new Punto(2, 2), new Punto(4, 4),
+                new Punto(0, 0), new Punto(1, 2), new Punto(3, 1), new Punto(3, 3)
+            };
+            System.out.println("Puntos originales para Convex Hull: " + java.util.Arrays.toString(puntosConvexHull));
+            java.util.List<Punto> hull = convexHullGrahamScan(puntosConvexHull); 
+            System.out.println("Envolvente Convexa (Graham Scan): " + hull);
+
+            Punto[] puntosColineales = {new Punto(0,0), new Punto(1,1), new Punto(2,2), new Punto(3,3), new Punto(1,0)};
+            System.out.println("Puntos colineales + 1: " + java.util.Arrays.toString(puntosColineales));
+            java.util.List<Punto> hullColineal = convexHullGrahamScan(puntosColineales);
+            System.out.println("Envolvente Convexa (colineales): " + hullColineal);
+
+
+            Punto[] puntosClosestPair = {
+                new Punto(2, 3), new Punto(12, 30), new Punto(40, 50), new Punto(5, 1),
+                new Punto(12, 10), new Punto(3, 4), new Punto(2.5, 3.5)
+            };
+            System.out.println("\\nPuntos originales para Closest Pair: " + java.util.Arrays.toString(puntosClosestPair));
+            
+            Object[] resultadoFuerzaBruta = closestPairFuerzaBruta(puntosClosestPair);
+            if (resultadoFuerzaBruta != null) {
+                 System.out.printf("Par más cercano (Fuerza Bruta): %s, %s. Distancia: %.4f\\n",
+                    resultadoFuerzaBruta[0], resultadoFuerzaBruta[1], resultadoFuerzaBruta[2]);
+            }
+
+            try {
+                Object[] resultadoDivVenc = closestPairDivideYVenceras(puntosClosestPair);
+                 System.out.printf("Par más cercano (Divide y Vencerás): %s, %s. Distancia: %.4f\\n",
+                    resultadoDivVenc[0], resultadoDivVenc[1], resultadoDivVenc[2]);
+            } catch (Exception e) {
+                System.out.println("Error en Closest Pair (Divide y Vencerás): " + e.getMessage());
+                 // e.printStackTrace(); 
+            }
+            
+            Punto[] pocosPuntos = {new Punto(0,0), new Punto(10,10)};
+            Object[] resultadoPocosFB = closestPairFuerzaBruta(pocosPuntos);
+             System.out.printf("Par más cercano (Pocos Puntos FB): %s, %s. Distancia: %.4f\\n",
+                    resultadoPocosFB[0], resultadoPocosFB[1], resultadoPocosFB[2]);
+            Object[] resultadoPocosDV = closestPairDivideYVenceras(pocosPuntos);
+             System.out.printf("Par más cercano (Pocos Puntos DV): %s, %s. Distancia: %.4f\\n",
+                    resultadoPocosDV[0], resultadoPocosDV[1], resultadoPocosDV[2]);
+
+
+            System.out.println("--- Fin Demo Algoritmos Geométricos ---");
         }
     }
     
     /**
-     * Clase para demostrar operaciones de criptografía básicas
+     * Clase para simular procesamiento básico de audio.
+     * No utiliza bibliotecas externas de audio, solo manipula arrays de doubles como muestras.
      */
-    public static class Criptografia {
-        
+    public static class ProcesamientoAudioBasico {
+
         /**
-         * Cifrado César básico
-         * 
-         * @param texto Texto a cifrar
-         * @param desplazamiento Cantidad de posiciones a desplazar
-         * @return Texto cifrado
+         * Genera una onda sinusoidal simple.
+         * @param frecuencia Frecuencia de la onda en Hz.
+         * @param duracion Duración de la onda en segundos.
+         * @param sampleRate Tasa de muestreo en Hz (e.g., 44100).
+         * @param amplitud Amplitud de la onda (0.0 a 1.0).
+         * @return Array de doubles representando las muestras de la onda.
          */
-        public static String cifradoCesar(String texto, int desplazamiento) {
-            if (texto == null || texto.isEmpty()) {
-                return "";
+        public static double[] generarOndaSinusoidal(double frecuencia, double duracion, int sampleRate, double amplitud) {
+            if (frecuencia <= 0 || duracion <= 0 || sampleRate <= 0 || amplitud < 0 || amplitud > 1.0) {
+                throw new IllegalArgumentException("Parámetros inválidos para generar onda.");
             }
-            
-            StringBuilder resultado = new StringBuilder();
-            
-            for (char c : texto.toCharArray()) {
-                if (Character.isLetter(c)) {
-                    char base = Character.isUpperCase(c) ? 'A' : 'a';
-                    // Aplicar el desplazamiento circular (módulo 26)
-                    char cifrado = (char) (((c - base + desplazamiento) % 26) + base);
-                    resultado.append(cifrado);
-                } else {
-                    resultado.append(c); // Mantener caracteres no alfabéticos
+            int numMuestras = (int) (duracion * sampleRate);
+            double[] onda = new double[numMuestras];
+            for (int i = 0; i < numMuestras; i++) {
+                onda[i] = amplitud * Math.sin(2 * Math.PI * frecuencia * i / sampleRate);
+            }
+            return onda;
+        }
+
+        /**
+         * Aplica un efecto de eco simple a una señal de audio.
+         * @param senalOriginal Array de muestras de la señal original.
+         * @param retrasoSegundos Retraso del eco en segundos.
+         * @param factorDecaimiento Factor de decaimiento del eco (0.0 a 1.0).
+         * @param sampleRate Tasa de muestreo de la señal.
+         * @return Nueva señal con el eco aplicado.
+         */
+        public static double[] aplicarEco(double[] senalOriginal, double retrasoSegundos, double factorDecaimiento, int sampleRate) {
+            if (senalOriginal == null || retrasoSegundos < 0 || factorDecaimiento < 0 || factorDecaimiento > 1.0 || sampleRate <= 0) {
+                 throw new IllegalArgumentException("Parámetros inválidos para aplicar eco.");
+            }
+            int retrasoMuestras = (int) (retrasoSegundos * sampleRate);
+            if (retrasoMuestras <= 0) return java.util.Arrays.copyOf(senalOriginal, senalOriginal.length);
+
+            int lenOriginal = senalOriginal.length;
+            int lenNueva = lenOriginal + retrasoMuestras; 
+            double[] senalConEco = new double[lenNueva];
+
+            System.arraycopy(senalOriginal, 0, senalConEco, 0, lenOriginal);
+
+            for (int i = 0; i < lenOriginal; i++) {
+                if (i + retrasoMuestras < lenNueva) {
+                    senalConEco[i + retrasoMuestras] += senalOriginal[i] * factorDecaimiento;
+                    senalConEco[i + retrasoMuestras] = Math.max(-1.0, Math.min(1.0, senalConEco[i + retrasoMuestras]));
                 }
             }
-            
-            return resultado.toString();
+            return senalConEco;
         }
-        
+
         /**
-         * Descifrado César
-         * 
-         * @param textoCifrado Texto cifrado
-         * @param desplazamiento Cantidad de posiciones desplazadas
-         * @return Texto descifrado
+         * Invierte una señal de audio (reproduce hacia atrás).
+         * @param senal Array de muestras de la señal.
+         * @return Nueva señal invertida.
          */
-        public static String descifradoCesar(String textoCifrado, int desplazamiento) {
-            return cifradoCesar(textoCifrado, 26 - (desplazamiento % 26));
-        }
-        
-        /**
-         * Cifrado Vigenère
-         * 
-         * @param texto Texto a cifrar
-         * @param clave Clave para el cifrado
-         * @return Texto cifrado
-         */
-        public static String cifradoVigenere(String texto, String clave) {
-            if (texto == null || texto.isEmpty() || clave == null || clave.isEmpty()) {
-                return "";
+        public static double[] invertirAudio(double[] senal) {
+            if (senal == null) return null;
+            int n = senal.length;
+            double[] invertida = new double[n];
+            for (int i = 0; i < n; i++) {
+                invertida[i] = senal[n - 1 - i];
             }
+            return invertida;
+        }
+
+        /**
+         * Cambia el volumen de una señal de audio.
+         * @param senal Array de muestras.
+         * @param factor Factor de cambio de volumen (e.g., 0.5 para reducir a la mitad, 2.0 para duplicar).
+         * @return Nueva señal con volumen cambiado.
+         */
+        public static double[] cambiarVolumen(double[] senal, double factor) {
+            if (senal == null || factor < 0) {
+                throw new IllegalArgumentException("Señal nula o factor negativo.");
+            }
+            double[] resultado = new double[senal.length];
+            for (int i = 0; i < senal.length; i++) {
+                resultado[i] = senal[i] * factor;
+                resultado[i] = Math.max(-1.0, Math.min(1.0, resultado[i]));
+            }
+            return resultado;
+        }
+        
+        /**
+         * Mezcla dos señales de audio.
+         * @param senal1 Primera señal.
+         * @param senal2 Segunda señal.
+         * @return Señal mezclada. Si las longitudes son diferentes, la mezcla se hace hasta la longitud de la más corta.
+         */
+        public static double[] mezclarAudios(double[] senal1, double[] senal2) {
+            if (senal1 == null || senal2 == null) {
+                throw new IllegalArgumentException("Las señales no pueden ser nulas.");
+            }
+            int len = Math.min(senal1.length, senal2.length);
+            double[] mezclada = new double[len];
+            for (int i = 0; i < len; i++) {
+                mezclada[i] = (senal1[i] + senal2[i]) / 2.0; 
+                mezclada[i] = Math.max(-1.0, Math.min(1.0, mezclada[i]));
+            }
+            return mezclada;
+        }
+
+
+        /**
+         * Método de ejemplo para demostrar el procesamiento básico de audio.
+         */
+        public static void demoAudio() {
+            System.out.println("\\n--- Demo Procesamiento Básico de Audio ---");
+            int sampleRate = 44100;
+
+            System.out.println("Generando onda sinusoidal de 440Hz (La)...");
+
+            double[] tonoLa = generarOndaSinusoidal(440, 1.0, sampleRate, 0.5);
+            System.out.println("Longitud de la onda generada: " + tonoLa.length + " muestras.");
+
+            System.out.println("\\nAplicando eco...");
+            double[] tonoConEco = aplicarEco(tonoLa, 0.25, 0.4, sampleRate);
+            System.out.println("Longitud de la onda con eco: " + tonoConEco.length + " muestras.");
+
+            System.out.println("\\nInvirtiendo audio...");
+            double[] tonoInvertido = invertirAudio(tonoLa);
+            System.out.println("Longitud de la onda invertida: " + tonoInvertido.length + " muestras.");
+
+            System.out.println("\\nCambiando volumen (reduciendo a la mitad)...");
+
+            cambiarVolumen(tonoLa, 0.5);
             
-            StringBuilder resultado = new StringBuilder();
-            clave = clave.toUpperCase();
-            int claveLen = clave.length();
-            int claveIndex = 0;
-            
-            for (char c : texto.toCharArray()) {
-                if (Character.isLetter(c)) {
-                    char base = Character.isUpperCase(c) ? 'A' : 'a';
-                    // Obtener desplazamiento de la clave
-                    int desplazamiento = clave.charAt(claveIndex % claveLen) - 'A';
-                    // Aplicar cifrado César con este desplazamiento
-                    char cifrado = (char) (((c - base + desplazamiento) % 26) + base);
-                    resultado.append(cifrado);
-                    claveIndex++;
-                } else {
-                    resultado.append(c);
+            System.out.println("\\nGenerando segunda onda (Do - 261.63Hz)...");
+
+            double[] tonoDo = generarOndaSinusoidal(261.63, 1.0, sampleRate, 0.5);
+            System.out.println("Mezclando La y Do...");
+            double[] mezclaLaDo = mezclarAudios(tonoLa, tonoDo);
+            System.out.println("Longitud de la mezcla: " + mezclaLaDo.length + " muestras.");
+
+
+            System.out.println("--- Fin Demo Procesamiento Básico de Audio ---");
+        }
+    }
+
+    /**
+     * Clase para demostraciones de Teoría de Números.
+     */
+    public static class TeoriaDeNumeros {
+
+        /**
+         * Calcula el Máximo Común Divisor (MCD) de dos números usando el algoritmo de Euclides.
+         * @param a Primer número.
+         * @param b Segundo número.
+         * @return El MCD de a y b.
+         */
+        public static long mcdEuclides(long a, long b) {
+            a = Math.abs(a);
+            b = Math.abs(b);
+            while (b != 0) {
+                long temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
+        }
+
+        /**
+         * Calcula el Mínimo Común Múltiplo (MCM) de dos números.
+         * mcm(a,b) = |a*b| / mcd(a,b)
+         * @param a Primer número.
+         * @param b Segundo número.
+         * @return El MCM de a y b. Devuelve 0 si a o b es 0.
+         */
+        public static long mcm(long a, long b) {
+            if (a == 0 || b == 0) return 0;
+            long mcd = mcdEuclides(a, b);
+            if (mcd == 0) return 0; // Evitar división por cero si a y b son 0 (aunque mcdEuclides(0,0) devuelve 0)
+            return (Math.abs(a) / mcd) * Math.abs(b);
+        }
+
+        /**
+         * Test de primalidad básico (por división).
+         * Eficiente para números pequeños.
+         * @param n Número a probar.
+         * @return true si n es primo, false en caso contrario.
+         */
+        public static boolean esPrimoBasico(long n) {
+            if (n <= 1) return false;
+            if (n <= 3) return true;
+            if (n % 2 == 0 || n % 3 == 0) return false;
+            for (long i = 5; i * i <= n; i = i + 6) {
+                if (n % i == 0 || n % (i + 2) == 0)
+                    return false;
+            }
+            return true;
+        }
+        
+        /**
+         * Exponenciación modular (base^exp % mod).
+         * @param base La base.
+         * @param exp El exponente.
+         * @param mod El módulo.
+         * @return (base^exp) % mod.
+         */
+        private static long potenciaModular(long base, long exp, long mod) {
+            long res = 1;
+            base %= mod;
+            while (exp > 0) {
+                if (exp % 2 == 1) res = (res * base) % mod;
+                base = (base * base) % mod;
+                exp /= 2;
+            }
+            return res;
+        }
+
+        /**
+         * Test de primalidad de Miller-Rabin.
+         * Es un test probabilístico, pero con suficientes iteraciones (k) es muy fiable.
+         * @param n Número a probar.
+         * @param k Número de iteraciones (mayor k, mayor fiabilidad).
+         * @return true si n es probablemente primo, false si es compuesto.
+         */
+        public static boolean esPrimoMillerRabin(long n, int k) {
+            if (n <= 1 || n == 4) return false;
+            if (n <= 3) return true;
+            if (n % 2 == 0) return false;
+
+            long d = n - 1;
+            int s = 0;
+            while (d % 2 == 0) {
+                d /= 2;
+                s++;
+            }
+
+            java.util.Random rand = new java.util.Random();
+            for (int i = 0; i < k; i++) {
+                long a = 2 + (Math.abs(rand.nextLong()) % (n - 3)); 
+                long x = potenciaModular(a, d, n);
+
+                if (x == 1 || x == n - 1) continue; 
+
+                boolean compuesto = true;
+                for (int r = 1; r < s; r++) {
+                    x = (x * x) % n;
+                    if (x == n - 1) {
+                        compuesto = false; 
+                        break;
+                    }
+                }
+                if (compuesto) return false; 
+            }
+            return true; 
+        }
+
+
+        /**
+         * Factorización básica de un número (prueba por división).
+         * @param n Número a factorizar.
+         * @return Lista de factores primos.
+         */
+        public static java.util.List<Long> factorizacionBasica(long n) {
+            java.util.List<Long> factores = new java.util.ArrayList<>();
+            if (n <= 1) return factores;
+
+            while (n % 2 == 0) {
+                factores.add(2L);
+                n /= 2;
+            }
+
+            for (long i = 3; i * i <= n; i += 2) {
+                while (n % i == 0) {
+                    factores.add(i);
+                    n /= i;
                 }
             }
-            
-            return resultado.toString();
+
+            if (n > 1) { 
+                factores.add(n);
+            }
+            return factores;
         }
         
         /**
-         * Descifrado Vigenère
-         * 
-         * @param textoCifrado Texto cifrado
-         * @param clave Clave utilizada para cifrar
-         * @return Texto descifrado
+         * Genera números primos hasta un límite n usando la Criba de Eratóstenes.
+         * @param limite Límite superior (inclusivo) para encontrar primos.
+         * @return Lista de números primos hasta el límite.
          */
-        public static String descifradoVigenere(String textoCifrado, String clave) {
-            if (textoCifrado == null || textoCifrado.isEmpty() || clave == null || clave.isEmpty()) {
-                return "";
-            }
+        public static java.util.List<Integer> cribaEratostenes(int limite) {
+            if (limite < 2) return new java.util.ArrayList<>();
             
-            StringBuilder resultado = new StringBuilder();
-            clave = clave.toUpperCase();
-            int claveLen = clave.length();
-            int claveIndex = 0;
-            
-            for (char c : textoCifrado.toCharArray()) {
-                if (Character.isLetter(c)) {
-                    char base = Character.isUpperCase(c) ? 'A' : 'a';
-                    // Obtener desplazamiento de la clave
-                    int desplazamiento = clave.charAt(claveIndex % claveLen) - 'A';
-                    // Aplicar descifrado César con este desplazamiento
-                    char descifrado = (char) (((c - base - desplazamiento + 26) % 26) + base);
-                    resultado.append(descifrado);
-                    claveIndex++;
-                } else {
-                    resultado.append(c);
+            boolean[] esPrimoArray = new boolean[limite + 1];
+            java.util.Arrays.fill(esPrimoArray, true);
+            esPrimoArray[0] = esPrimoArray[1] = false;
+
+            for (int p = 2; p * p <= limite; p++) {
+                if (esPrimoArray[p]) {
+                    for (int i = p * p; i <= limite; i += p)
+                        esPrimoArray[i] = false;
                 }
             }
-            
-            return resultado.toString();
+
+            java.util.List<Integer> primos = new java.util.ArrayList<>();
+            for (int p = 2; p <= limite; p++) {
+                if (esPrimoArray[p])
+                    primos.add(p);
+            }
+            return primos;
         }
-        
+
+
         /**
-         * Genera un hash simple (no seguro, solo para demostración)
-         * 
-         * @param texto Texto a hashear
-         * @return Valor hash como cadena hexadecimal
+         * Método de ejemplo para demostrar funciones de teoría de números.
          */
-        public static String hashSimple(String texto) {
-            if (texto == null) {
-                return "";
-            }
+        public static void demoTeoriaNumeros() {
+            System.out.println("\\n--- Demo Teoría de Números ---");
+
+            long num1 = 48, num2 = 180;
+            System.out.printf("MCD(%d, %d) = %d\\n", num1, num2, mcdEuclides(num1, num2));
+            System.out.printf("MCM(%d, %d) = %d\\n", num1, num2, mcm(num1, num2));
+
+            long primoTest1 = 29;
+            long primoTest2 = 30;
+            System.out.printf("%d es primo (básico)? %b\\n", primoTest1, esPrimoBasico(primoTest1));
+            System.out.printf("%d es primo (básico)? %b\\n", primoTest2, esPrimoBasico(primoTest2));
             
-            int hash = 0;
+            long millerRabinTest1 = 104729; 
+            long millerRabinTest2 = 104730; 
+            int kMillerRabin = 10; 
+            System.out.printf("%d es primo (Miller-Rabin, k=%d)? %b\\n", millerRabinTest1, kMillerRabin, esPrimoMillerRabin(millerRabinTest1, kMillerRabin));
+            System.out.printf("%d es primo (Miller-Rabin, k=%d)? %b\\n", millerRabinTest2, kMillerRabin, esPrimoMillerRabin(millerRabinTest2, kMillerRabin));
+            System.out.printf("561 es primo (Miller-Rabin, k=%d)? %b (Nota: 561 es un número de Carmichael)\\n", kMillerRabin, esPrimoMillerRabin(561, kMillerRabin));
+
+
+            long numFactorizar = 98765432; 
+            System.out.printf("Factorización básica de %d: %s\\n", numFactorizar, factorizacionBasica(numFactorizar));
+            long numFactorizar2 = 17 * 23 * 29;
+            System.out.printf("Factorización básica de %d: %s\\n", numFactorizar2, factorizacionBasica(numFactorizar2));
             
-            for (int i = 0; i < texto.length(); i++) {
-                hash = (hash * 31 + texto.charAt(i)) % 1000000007;
-            }
-            
-            return Integer.toHexString(hash);
+            int limiteCriba = 100;
+            System.out.printf("Primos hasta %d (Criba de Eratóstenes): %s\\n", limiteCriba, cribaEratostenes(limiteCriba));
+
+            System.out.println("--- Fin Demo Teoría de Números ---");
         }
     }
     
-    /**
-     * Clase para demostrar algoritmos de inteligencia artificial básicos
-     */
-    public static class AlgoritmosIA {
-        
-        /**
-         * Implementación simple de un perceptrón para clasificación binaria
-         */
-        public static class Perceptron {
-            private double[] pesos;
-            private double bias;
-            private double tasaAprendizaje;
-            
-            /**
-             * Constructor para el perceptrón
-             * 
-             * @param numEntradas Número de características de entrada
-             * @param tasaAprendizaje Tasa de aprendizaje para actualizar pesos
-             */
-            public Perceptron(int numEntradas, double tasaAprendizaje) {
-                this.pesos = new double[numEntradas];
-                this.bias = 0.0;
-                this.tasaAprendizaje = tasaAprendizaje;
-                
-                // Inicializar pesos con valores aleatorios pequeños
-                Random random = new Random(42);
-                for (int i = 0; i < numEntradas; i++) {
-                    pesos[i] = random.nextDouble() * 0.1 - 0.05;
-                }
-            }
-            
-            /**
-             * Función de activación (escalón)
-             * 
-             * @param suma Suma ponderada
-             * @return 1 si suma > 0, 0 en caso contrario
-             */
-            private int activacion(double suma) {
-                return suma > 0 ? 1 : 0;
-            }
-            
-            /**
-             * Predice la clase de una muestra
-             * 
-             * @param entradas Vector de características
-             * @return Clase predicha (0 o 1)
-             */
-            public int predecir(double[] entradas) {
-                if (entradas.length != pesos.length) {
-                    throw new IllegalArgumentException("Número de entradas incorrecto");
-                }
-                
-                double suma = bias;
-                for (int i = 0; i < entradas.length; i++) {
-                    suma += entradas[i] * pesos[i];
-                }
-                
-                return activacion(suma);
-            }
-            
-            /**
-             * Entrena el perceptrón con un conjunto de datos
-             * 
-             * @param X Matriz de características (cada fila es una muestra)
-             * @param y Vector de etiquetas (0 o 1)
-             * @param epocas Número de épocas de entrenamiento
-             * @return Historia de errores por época
-             */
-            public double[] entrenar(double[][] X, int[] y, int epocas) {
-                if (X.length != y.length) {
-                    throw new IllegalArgumentException("Número de muestras y etiquetas debe ser igual");
-                }
-                
-                double[] errores = new double[epocas];
-                
-                for (int epoca = 0; epoca < epocas; epoca++) {
-                    int erroresEpoca = 0;
-                    
-                    for (int i = 0; i < X.length; i++) {
-                        // Predecir
-                        int prediccion = predecir(X[i]);
-                        
-                        // Calcular error
-                        int error = y[i] - prediccion;
-                        
-                        if (error != 0) {
-                            erroresEpoca++;
-                            
-                            // Actualizar bias
-                            bias += tasaAprendizaje * error;
-                            
-                            // Actualizar pesos
-                            for (int j = 0; j < pesos.length; j++) {
-                                pesos[j] += tasaAprendizaje * error * X[i][j];
-                            }
-                        }
-                    }
-                    
-                    // Guardar tasa de error para esta época
-                    errores[epoca] = (double) erroresEpoca / X.length;
-                }
-                
-                return errores;
-            }
-            
-            /**
-             * Obtiene los pesos del perceptrón
-             * 
-             * @return Vector de pesos
-             */
-            public double[] getPesos() {
-                return pesos;
-            }
-            
-            /**
-             * Obtiene el bias del perceptrón
-             * 
-             * @return Bias
-             */
-            public double getBias() {
-                return bias;
-            }
-        }
-        
-        /**
-         * Implementación simple de un algoritmo genético
-         */
-        public static class AlgoritmoGenetico {
-            private int tamPoblacion;
-            private int longIndividuo;
-            private double tasaMutacion;
-            private double tasaCruce;
-            private Random random;
-            
-            /**
-             * Constructor para el algoritmo genético
-             * 
-             * @param tamPoblacion Tamaño de la población
-             * @param longIndividuo Longitud de cada individuo (cromosoma)
-             * @param tasaMutacion Probabilidad de mutación (0-1)
-             * @param tasaCruce Probabilidad de cruce (0-1)
-             */
-            public AlgoritmoGenetico(int tamPoblacion, int longIndividuo, double tasaMutacion, double tasaCruce) {
-                this.tamPoblacion = tamPoblacion;
-                this.longIndividuo = longIndividuo;
-                this.tasaMutacion = tasaMutacion;
-                this.tasaCruce = tasaCruce;
-                this.random = new Random(42);
-            }
-            
-            /**
-             * Genera una población inicial aleatoria
-             * 
-             * @return Matriz de individuos (cada fila es un individuo)
-             */
-            public int[][] inicializarPoblacion() {
-                int[][] poblacion = new int[tamPoblacion][longIndividuo];
-                
-                for (int i = 0; i < tamPoblacion; i++) {
-                    for (int j = 0; j < longIndividuo; j++) {
-                        poblacion[i][j] = random.nextInt(2);  // Valores binarios (0 o 1)
-                    }
-                }
-                
-                return poblacion;
-            }
-            
-            /**
-             * Evalúa la aptitud de un individuo (fitness)
-             * Este es un ejemplo simple que cuenta unos
-             * 
-             * @param individuo Vector binario
-             * @return Valor de aptitud
-             */
-            public int evaluar(int[] individuo) {
-                int suma = 0;
-                for (int gen : individuo) {
-                    suma += gen;
-                }
-                return suma;
-            }
-            
-            /**
-             * Selecciona individuos para reproducción mediante torneo
-             * 
-             * @param poblacion Población actual
-             * @param tamTorneo Tamaño del torneo
-             * @return Índice del individuo seleccionado
-             */
-            public int seleccionTorneo(int[][] poblacion, int tamTorneo) {
-                int mejorIndice = random.nextInt(tamPoblacion);
-                int mejorFitness = evaluar(poblacion[mejorIndice]);
-                
-                for (int i = 1; i < tamTorneo; i++) {
-                    int indice = random.nextInt(tamPoblacion);
-                    int fitness = evaluar(poblacion[indice]);
-                    
-                    if (fitness > mejorFitness) {
-                        mejorFitness = fitness;
-                        mejorIndice = indice;
-                    }
-                }
-                
-                return mejorIndice;
-            }
-            
-            /**
-             * Realiza cruce entre dos padres
-             * 
-             * @param padre1 Primer padre
-             * @param padre2 Segundo padre
-             * @return Dos hijos resultantes del cruce
-             */
-            public int[][] cruce(int[] padre1, int[] padre2) {
-                int[][] hijos = new int[2][longIndividuo];
-                
-                if (random.nextDouble() < tasaCruce) {
-                    // Punto de cruce aleatorio
-                    int punto = random.nextInt(longIndividuo - 1) + 1;
-                    
-                    // Primer hijo
-                    for (int i = 0; i < punto; i++) {
-                        hijos[0][i] = padre1[i];
-                    }
-                    for (int i = punto; i < longIndividuo; i++) {
-                        hijos[0][i] = padre2[i];
-                    }
-                    
-                    // Segundo hijo
-                    for (int i = 0; i < punto; i++) {
-                        hijos[1][i] = padre2[i];
-                    }
-                    for (int i = punto; i < longIndividuo; i++) {
-                        hijos[1][i] = padre1[i];
-                    }
-                } else {
-                    // Sin cruce, copiar padres
-                    hijos[0] = padre1.clone();
-                    hijos[1] = padre2.clone();
-                }
-                
-                return hijos;
-            }
-            
-            /**
-             * Aplica mutación a un individuo
-             * 
-             * @param individuo Individuo a mutar
-             */
-            public void mutar(int[] individuo) {
-                for (int i = 0; i < longIndividuo; i++) {
-                    if (random.nextDouble() < tasaMutacion) {
-                        // Invertir bit
-                        individuo[i] = 1 - individuo[i];
-                    }
-                }
-            }
-            
-            /**
-             * Ejecuta el algoritmo genético
-             * 
-             * @param generaciones Número de generaciones
-             * @return Mejor individuo encontrado
-             */
-            public int[] ejecutar(int generaciones) {
-                // Inicializar población
-                int[][] poblacion = inicializarPoblacion();
-                
-                // Mejor individuo global
-                int[] mejorIndividuo = null;
-                int mejorFitness = -1;
-                
-                for (int gen = 0; gen < generaciones; gen++) {
-                    // Nueva población
-                    int[][] nuevaPoblacion = new int[tamPoblacion][longIndividuo];
-                    
-                    // Elitismo: conservar al mejor
-                    int indiceMejor = 0;
-                    int fitnessMejor = evaluar(poblacion[0]);
-                    
-                    for (int i = 1; i < tamPoblacion; i++) {
-                        int fitness = evaluar(poblacion[i]);
-                        if (fitness > fitnessMejor) {
-                            fitnessMejor = fitness;
-                            indiceMejor = i;
-                        }
-                    }
-                    
-                    // Actualizar mejor global
-                    if (fitnessMejor > mejorFitness) {
-                        mejorFitness = fitnessMejor;
-                        mejorIndividuo = poblacion[indiceMejor].clone();
-                    }
-                    
-                    // Conservar el mejor
-                    nuevaPoblacion[0] = poblacion[indiceMejor].clone();
-                    
-                    // Crear el resto de la población
-                    for (int i = 1; i < tamPoblacion; i += 2) {
-                        // Seleccionar padres
-                        int indicePadre1 = seleccionTorneo(poblacion, 3);
-                        int indicePadre2 = seleccionTorneo(poblacion, 3);
-                        
-                        // Cruzar
-                        int[][] hijos = cruce(poblacion[indicePadre1], poblacion[indicePadre2]);
-                        
-                        // Mutar
-                        mutar(hijos[0]);
-                        mutar(hijos[1]);
-                        
-                        // Añadir a nueva población
-                        nuevaPoblacion[i] = hijos[0];
-                        if (i + 1 < tamPoblacion) {
-                            nuevaPoblacion[i + 1] = hijos[1];
-                        }
-                    }
-                    
-                    // Reemplazar población
-                    poblacion = nuevaPoblacion;
-                }
-                
-                return mejorIndividuo;
-            }
-        }
+    // Método main de ejemplo para ejecutar las demos (opcional, solo para pruebas locales)
+    /*
+    public static void main(String[] args) {
+        AlgoritmosGrafosAvanzados.demoGrafosAvanzados();
+        AlgoritmosGeometricos.demoGeometricos();
+        ProcesamientoAudioBasico.demoAudio();
+        TeoriaDeNumeros.demoTeoriaNumeros();
     }
-}
+    */
+
+} // Fin de la clase Contacto
