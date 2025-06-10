@@ -40,6 +40,8 @@ const ProductosAdmin = () => {
     codigo: ''
   });
   const [productoEncontrado, setProductoEncontrado] = useState(null);
+  const [editandoProducto, setEditandoProducto] = useState(false);
+  const [productoEditando, setProductoEditando] = useState(null);
 
   const categorias = ['Todos', 'Perfumes', 'Maquillaje', 'Cremas', 'Joyas'];
   const marcas = ['Dior', 'Carolina Herrera', 'Lancôme', 'MAC', 'L\'Oreal', 'Maybelline'];
@@ -84,9 +86,10 @@ const cargarProductos = async () => {
   const handleAgregarClick = () => {
     setMostrarModal(true);
   };
-
   const handleCancelarClick = () => {
     setMostrarModal(false);
+    setEditandoProducto(false);
+    setProductoEditando(null);
     setNuevoProducto({
       nombre: '',
       categoria: '',
@@ -95,6 +98,7 @@ const cargarProductos = async () => {
       precio: '',
       codigo: ''
     });
+    setErrores({});
   };
 
   const validarFormulario = () => {
@@ -128,28 +132,23 @@ const cargarProductos = async () => {
 
 const handleGuardarProducto = async () => {
   if (validarFormulario()) {
-    const nuevoProductoFormateado = {
-      nombre_producto: nuevoProducto.nombre,
-      descripcion: nuevoProducto.descripcion || '',
-      precio: Number(nuevoProducto.precio),
-      stock: Number(nuevoProducto.stock) || 0,
-      id_categoria: categorias.findIndex(cat => cat === nuevoProducto.categoria),
-      estado: true
-    };
-
     try {
-      const token = localStorage.getItem('token'); // <-- agrega esta línea antes del fetch
-      const response = await fetch('http://localhost:3001/api/productos', {
-       method: 'POST',
-       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` // <-- agrega esta línea
-  },
-  body: JSON.stringify(nuevoProducto)
-});
-      if (!response.ok) throw new Error('Error al guardar el producto');
-      // Recarga productos desde el backend
-      await cargarProductos();
+      // En un entorno real, esta sería una llamada API
+      // Por ahora trabajaremos solo con el estado local
+      const nuevoId = nuevoProducto.codigo;
+      const productoFormateado = {
+        id: nuevoId,
+        nombre: nuevoProducto.nombre,
+        categoria: nuevoProducto.categoria,
+        marca: nuevoProducto.marca,
+        sexo: nuevoProducto.sexo,
+        precio: Number(nuevoProducto.precio)
+      };
+      
+      // Actualizar el estado de productos
+      setProductos(prevProductos => [...prevProductos, productoFormateado]);
+      
+      // Cerrar el modal y limpiar formulario
       setMostrarModal(false);
       setNuevoProducto({
         nombre: '',
@@ -160,6 +159,9 @@ const handleGuardarProducto = async () => {
         codigo: ''
       });
       setErrores({});
+      
+      // Mostrar mensaje de éxito
+      alert('Producto agregado con éxito');
     } catch (error) {
       alert('No se pudo guardar el producto');
     }
@@ -218,6 +220,111 @@ const handleGuardarProducto = async () => {
     saveAs(blob, 'productos.xlsx');
   };
 
+  const handleEditarClick = () => {
+    // Cargar los datos del producto encontrado en el formulario
+    if (productoEncontrado) {
+      setNuevoProducto({
+        nombre: productoEncontrado.nombre,
+        categoria: productoEncontrado.categoria,
+        marca: productoEncontrado.marca || '',
+        sexo: productoEncontrado.sexo || '',
+        precio: productoEncontrado.precio.toString(),
+        codigo: productoEncontrado.id
+      });
+      setEditandoProducto(true);
+      setProductoEditando(productoEncontrado.id);
+      setMostrarModalResultado(false);
+      setMostrarModal(true);
+    }
+  };
+
+  const handleActualizarProducto = async () => {
+    if (validarFormularioEdicion()) {
+      try {
+        // En un entorno real, esta sería una llamada API
+        // Por ahora trabajaremos solo con el estado local
+        const productoActualizado = {
+          id: productoEditando,
+          nombre: nuevoProducto.nombre,
+          categoria: nuevoProducto.categoria,
+          marca: nuevoProducto.marca,
+          sexo: nuevoProducto.sexo,
+          precio: Number(nuevoProducto.precio)
+        };
+        
+        // Actualizar el estado de productos
+        setProductos(prevProductos => 
+          prevProductos.map(p => p.id === productoEditando ? productoActualizado : p)
+        );
+        
+        // Cerrar el modal y limpiar formulario
+        setMostrarModal(false);
+        setEditandoProducto(false);
+        setProductoEditando(null);
+        setNuevoProducto({
+          nombre: '',
+          categoria: '',
+          marca: '',
+          sexo: '',
+          precio: '',
+          codigo: ''
+        });
+        setErrores({});
+        
+        // Mostrar mensaje de éxito
+        alert('Producto actualizado con éxito');
+      } catch (error) {
+        alert('No se pudo actualizar el producto');
+      }
+    }
+  };
+
+  const validarFormularioEdicion = () => {
+    const nuevosErrores = {};
+    
+    if (!nuevoProducto.nombre.trim()) {
+      nuevosErrores.nombre = 'El nombre es requerido';
+    }
+    
+    if (!nuevoProducto.categoria) {
+      nuevosErrores.categoria = 'La categoría es requerida';
+    }
+    
+    if (!nuevoProducto.marca) {
+      nuevosErrores.marca = 'La marca es requerida';
+    }
+    
+    if (!nuevoProducto.precio || nuevoProducto.precio <= 0) {
+      nuevosErrores.precio = 'El precio debe ser mayor a 0';
+    }
+    
+    setErrores(nuevosErrores);
+    return Object.keys(nuevosErrores).length === 0;
+  };
+  const handleEliminarProducto = () => {
+    if (productoEncontrado && window.confirm('¿Está seguro que desea eliminar este producto?')) {
+      try {
+        // En un entorno real, esta sería una llamada API
+        // Por ahora trabajaremos solo con el estado local
+        setProductos(prevProductos => 
+          prevProductos.filter(p => p.id !== productoEncontrado.id)
+        );
+        
+        // Cerrar el modal y limpiar formulario
+        setMostrarModalResultado(false);
+        setProductoEncontrado(null);
+        setBusquedaProducto({
+          categoria: '',
+          codigo: ''
+        });
+        
+        // Mostrar mensaje de éxito
+        alert('Producto eliminado con éxito');
+      } catch (error) {
+        alert('No se pudo eliminar el producto');
+      }
+    }
+  };
   return (
     <div className="page-container-for-fixed-nav">
       <Navbar />
@@ -236,8 +343,7 @@ const handleGuardarProducto = async () => {
         {/* Modal de Nuevo Producto */}
         {mostrarModal && (
           <div className="modal-overlay">
-            <div className="modal-content">
-              <h2>Nuevo Producto</h2>
+            <div className="modal-content">              <h2>{editandoProducto ? 'Editar Producto' : 'Nuevo Producto'}</h2>
               <hr className="divisor" />
               <div className="form-grid">
                 <div className="form-column">
@@ -311,8 +417,7 @@ const handleGuardarProducto = async () => {
                       step="0.01"
                     />
                     {errores.precio && <span className="error-message">{errores.precio}</span>}
-                  </div>
-                  <div className="form-group">
+                  </div>                  <div className="form-group">
                     <label>Código</label>
                     <input
                       type="text"
@@ -321,14 +426,19 @@ const handleGuardarProducto = async () => {
                       value={nuevoProducto.codigo}
                       onChange={handleInputChange}
                       className={errores.codigo ? 'input-error' : ''}
+                      disabled={editandoProducto}
                     />
                     {errores.codigo && <span className="error-message">{errores.codigo}</span>}
                   </div>
                 </div>
-              </div>
-              <div className="modal-buttons">
+              </div>              <div className="modal-buttons">
                 <button onClick={handleCancelarClick} className="btn-cancelar">Cancelar</button>
-                <button onClick={handleGuardarProducto} className="btn-guardar">Guardar</button>
+                <button 
+                  onClick={editandoProducto ? handleActualizarProducto : handleGuardarProducto} 
+                  className="btn-guardar"
+                >
+                  {editandoProducto ? 'Actualizar' : 'Guardar'}
+                </button>
               </div>
             </div>
           </div>
@@ -441,8 +551,8 @@ const handleGuardarProducto = async () => {
                   <span className="flecha-back">←</span> Volver
                 </button>
                 <div>
-                  <button className="btn-eliminar">Eliminar</button>
-                  <button className="btn-editar">Editar</button>
+                  <button className="btn-eliminar" onClick={handleEliminarProducto}>Eliminar</button>
+                  <button className="btn-editar" onClick={handleEditarClick}>Editar</button>
                 </div>
                 <button className="btn-guardar">Guardar Producto</button>
               </div>
