@@ -3745,8 +3745,8 @@ class BasuraMatematica {
         void dfs(int v, boolean[] vis) {
             vis[v]=true;
             for(int u:adj.get(v)) if(!vis[u]) dfs(u,vis);
-        }
-    }
+        }    }
+    
     // Métodos basura para llenar líneas
     public static void metodosBasura() {
         for(int i=0;i<100;i++) {
