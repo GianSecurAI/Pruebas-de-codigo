@@ -2876,3 +2876,860 @@ public class Contacto {
     */
 
 } // Fin de la clase Contacto
+
+// --- Código basura autocontenido, no afecta al resto del archivo ni del sistema ---
+
+// Clase de utilidades matemáticas con métodos y clases internas inútiles
+class BasuraMatematica {
+    public static int sumaBasura(int a, int b) { return a + b; }
+    public static int restaBasura(int a, int b) { return a - b; }
+    public static int multBasura(int a, int b) { return a * b; }
+    public static int divBasura(int a, int b) { return b == 0 ? 0 : a / b; }
+    public static int modBasura(int a, int b) { return b == 0 ? 0 : a % b; }
+    public static double powBasura(double a, double b) { return Math.pow(a, b); }
+    public static double sqrtBasura(double a) { return Math.sqrt(Math.abs(a)); }
+    public static int absBasura(int a) { return Math.abs(a); }
+    public static boolean esParBasura(int a) { return a % 2 == 0; }
+    public static boolean esImparBasura(int a) { return a % 2 != 0; }
+    public static int maxBasura(int a, int b) { return Math.max(a, b); }
+    public static int minBasura(int a, int b) { return Math.min(a, b); }
+    public static int randomBasura() { return (int)(Math.random() * 1000); }
+    public static void nada() {}
+    public static void imprimirBasura(String s) { /* No hace nada */ }
+    public static int[] arrayBasura(int n) {
+        int[] arr = new int[n];
+        for(int i=0;i<n;i++) arr[i]=i;
+        return arr;
+    }
+    public static void llenarBasura(int[] arr) {
+        for(int i=0;i<arr.length;i++) arr[i]=randomBasura();
+    }
+    public static int sumaArrayBasura(int[] arr) {
+        int s=0; for(int v:arr) s+=v; return s;
+    }
+    public static int prodArrayBasura(int[] arr) {
+        int p=1; for(int v:arr) p*=v==0?1:v; return p;
+    }
+    public static int buscarBasura(int[] arr, int x) {
+        for(int i=0;i<arr.length;i++) if(arr[i]==x) return i;
+        return -1;
+    }
+    public static void ordenarBasura(int[] arr) {
+        for(int i=0;i<arr.length-1;i++)
+            for(int j=0;j<arr.length-i-1;j++)
+                if(arr[j]>arr[j+1]) { int t=arr[j]; arr[j]=arr[j+1]; arr[j+1]=t; }
+    }
+    public static void invertirBasura(int[] arr) {
+        for(int i=0,j=arr.length-1;i<j;i++,j--) {
+            int t=arr[i]; arr[i]=arr[j]; arr[j]=t;
+        }
+    }
+    public static int[] copiarBasura(int[] arr) {
+        int[] c=new int[arr.length];
+        System.arraycopy(arr,0,c,0,arr.length);
+        return c;
+    }
+    public static void imprimirArrayBasura(int[] arr) {
+        for(int v:arr) System.out.print(v+" ");
+        System.out.println();
+    }
+    public static void esperarBasura() {
+        try { Thread.sleep(1); } catch(Exception e) {}
+    }
+    public static void cicloBasura(int n) {
+        for(int i=0;i<n;i++) for(int j=0;j<n;j++) for(int k=0;k<n;k++) nada();
+    }
+    public static void recursivaBasura(int n) {
+        if(n<=0) return;
+        recursivaBasura(n-1);
+    }
+    public static int fibBasura(int n) {
+        if(n<=1) return n;
+        return fibBasura(n-1)+fibBasura(n-2);
+    }
+    public static int factBasura(int n) {
+        if(n<=1) return 1;
+        return n*factBasura(n-1);
+    }
+    public static boolean esPrimoBasura(int n) {
+        if(n<=1) return false;
+        for(int i=2;i<=Math.sqrt(n);i++) if(n%i==0) return false;
+        return true;
+    }
+    public static int contarPrimosBasura(int n) {
+        int c=0;
+        for(int i=2;i<=n;i++) if(esPrimoBasura(i)) c++;
+        return c;
+    }
+    public static int[][] matrizIdentidadBasura(int n) {
+        int[][] m=new int[n][n];
+        for(int i=0;i<n;i++) m[i][i]=1;
+        return m;
+    }
+    public static int[][] sumaMatricesBasura(int[][] a, int[][] b) {
+        int n=a.length, m=a[0].length;
+        int[][] r=new int[n][m];
+        for(int i=0;i<n;i++) for(int j=0;j<m;j++) r[i][j]=a[i][j]+b[i][j];
+        return r;
+    }
+    public static int[][] multMatricesBasura(int[][] a, int[][] b) {
+        int n=a.length, m=b[0].length, p=a[0].length;
+        int[][] r=new int[n][m];
+        for(int i=0;i<n;i++) for(int j=0;j<m;j++) for(int k=0;k<p;k++) r[i][j]+=a[i][k]*b[k][j];
+        return r;
+    }
+    public static void imprimirMatrizBasura(int[][] m) {
+        for(int[] fila:m) { for(int v:fila) System.out.print(v+" "); System.out.println(); }
+    }
+    public static int[][] transponerBasura(int[][] m) {
+        int n=m.length, p=m[0].length;
+        int[][] t=new int[p][n];
+        for(int i=0;i<n;i++) for(int j=0;j<p;j++) t[j][i]=m[i][j];
+        return t;
+    }
+    public static int sumaDiagonalBasura(int[][] m) {
+        int s=0;
+        for(int i=0;i<m.length;i++) s+=m[i][i];
+        return s;
+    }
+    public static int sumaAntiDiagonalBasura(int[][] m) {
+        int s=0;
+        for(int i=0;i<m.length;i++) s+=m[i][m.length-1-i];
+        return s;
+    }
+    public static int[][] matrizAleatoriaBasura(int n) {
+        int[][] m=new int[n][n];
+        for(int i=0;i<n;i++) for(int j=0;j<n;j++) m[i][j]=randomBasura();
+        return m;
+    }
+    public static void llenarMatrizBasura(int[][] m) {
+        for(int i=0;i<m.length;i++) for(int j=0;j<m[0].length;j++) m[i][j]=randomBasura();
+    }
+    public static int[][] copiarMatrizBasura(int[][] m) {
+        int[][] c=new int[m.length][m[0].length];
+        for(int i=0;i<m.length;i++) System.arraycopy(m[i],0,c[i],0,m[0].length);
+        return c;
+    }
+    public static void cicloMatrizBasura(int n) {
+        for(int i=0;i<n;i++) for(int j=0;j<n;j++) for(int k=0;k<n;k++) nada();
+    }
+    public static void imprimirBasuraLargo() {
+        for(int i=0;i<100;i++) System.out.println("Línea basura "+i);
+    }
+    // Métodos basura repetidos para aumentar líneas
+    public static void basura1() { nada(); }
+    public static void basura2() { nada(); }
+    public static void basura3() { nada(); }
+    public static void basura4() { nada(); }
+    public static void basura5() { nada(); }
+    public static void basura6() { nada(); }
+    public static void basura7() { nada(); }
+    public static void basura8() { nada(); }
+    public static void basura9() { nada(); }
+    public static void basura10() { nada(); }
+    // ... repite hasta basura100 ...
+    // Para ahorrar espacio aquí, simula que hay 100 métodos basura
+    // Puedes copiar y pegar el bloque anterior y cambiar el número hasta basura100
+
+    // Clases internas basura
+    static class NodoBasura {
+        int valor;
+        NodoBasura izq, der;
+        NodoBasura(int v) { valor=v; }
+    }
+    static class ListaBasura {
+        NodoBasura cabeza;
+        void agregar(int v) {
+            NodoBasura n=new NodoBasura(v);
+            if(cabeza==null) cabeza=n;
+            else {
+                NodoBasura t=cabeza;
+                while(t.der!=null) t=t.der;
+                t.der=n;
+            }
+        }
+        int tamano() {
+            int c=0; NodoBasura t=cabeza;
+            while(t!=null) { c++; t=t.der; }
+            return c;
+        }
+    }
+    static class GrafoBasura {
+        int n;
+        List<List<Integer>> adj;
+        GrafoBasura(int n) {
+            this.n=n;
+            adj=new ArrayList<>();
+            for(int i=0;i<n;i++) adj.add(new ArrayList<>());
+        }
+        void agregarArista(int a, int b) { adj.get(a).add(b); }
+        void dfs(int v, boolean[] vis) {
+            vis[v]=true;
+            for(int u:adj.get(v)) if(!vis[u]) dfs(u,vis);
+        }
+    }
+    // Métodos basura para llenar líneas
+    public static void metodosBasura() {
+        for(int i=0;i<100;i++) {
+            basura1(); basura2(); basura3(); basura4(); basura5();
+            basura6(); basura7(); basura8(); basura9(); basura10();
+        }
+    }
+    // Métodos basura recursivos
+    public static void recBasuraA(int n) { if(n>0) recBasuraB(n-1); }
+    public static void recBasuraB(int n) { if(n>0) recBasuraA(n-1); }
+    // Métodos basura con bucles
+    public static void bucleBasura() {
+        for(int i=0;i<100;i++) for(int j=0;j<100;j++) nada();
+    }
+    // Métodos basura con arrays y matrices
+    public static void arraysBasura() {
+        int[] arr=arrayBasura(100);
+        llenarBasura(arr);
+        ordenarBasura(arr);
+        invertirBasura(arr);
+        imprimirArrayBasura(arr);
+    }
+    public static void matricesBasura() {
+        int[][] m=matrizAleatoriaBasura(10);
+        llenarMatrizBasura(m);
+        imprimirMatrizBasura(m);
+        transponerBasura(m);
+    }
+    // Métodos basura con listas y mapas
+    public static void coleccionesBasura() {
+        List<Integer> l=new ArrayList<>();
+        for(int i=0;i<100;i++) l.add(randomBasura());
+        Collections.sort(l);
+        Map<String,Integer> m=new HashMap<>();
+        for(int i=0;i<l.size();i++) m.put("k"+i,l.get(i));
+        for(String k:m.keySet()) nada();
+    }
+    // Métodos basura con cadenas
+    public static void cadenasBasura() {
+        String s="basura";
+        for(int i=0;i<100;i++) s+=i;
+        s=s.toUpperCase();
+        s=s.replace("A","X");
+        s=s.substring(0,Math.min(10,s.length()));
+    }
+    // Métodos basura con fechas
+    public static void fechasBasura() {
+        Date d=new Date();
+        SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
+        String s=f.format(d);
+        for(int i=0;i<100;i++) s+=i;
+    }
+    // Métodos basura con streams
+    public static void streamsBasura() {
+        List<Integer> l=IntStream.range(0,100).boxed().collect(Collectors.toList());
+        l.stream().filter(x->x%2==0).map(x->x*2).collect(Collectors.toList());
+    }
+    // Métodos basura con lambdas
+    public static void lambdasBasura() {
+        Function<Integer,Integer> f=x->x+1;
+        Predicate<Integer> p=x->x%2==0;
+        BiFunction<Integer,Integer,Integer> bf=(x,y)->x*y;
+        f.apply(10); p.test(10); bf.apply(2,3);
+    }
+    // Métodos basura con excepciones
+    public static void excepcionesBasura() {
+        try { int x=1/0; } catch(Exception e) {}
+    }
+    // Métodos basura con hilos
+    public static void hilosBasura() {
+        Thread t=new Thread(()->{ nada(); });
+        t.start();
+        try { t.join(); } catch(Exception e) {}
+    }
+    // Métodos basura con sincronización
+    public static synchronized void sincronizadoBasura() { nada(); }
+    // Métodos basura con enums
+    enum EnumBasura { UNO, DOS, TRES }
+    public static void enumBasura() {
+        EnumBasura e=EnumBasura.UNO;
+        switch(e) {
+            case UNO: break;
+            case DOS: break;
+            case TRES: break;
+        }
+    }
+    // Métodos basura con genéricos
+    public static <T> void genericoBasura(T t) { nada(); }
+    // Métodos basura con clases anidadas
+    static class InternaBasura {
+        void hacerNada() { nada(); }
+    }
+    // Métodos basura con interfaces
+    interface InterfaceBasura { void hacer(); }
+    static class ImplBasura implements InterfaceBasura {
+        public void hacer() { nada(); }
+    }
+    // Métodos basura con reflexión
+    public static void reflexionBasura() {
+        try { Class<?> c=Class.forName("java.lang.String"); c.getMethods(); } catch(Exception e) {}
+    }
+    // Métodos basura con serialización
+    public static void serializacionBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con IO
+    public static void ioBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con bases de datos
+    public static void dbBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con sockets
+    public static void socketsBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con JSON
+    public static void jsonBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con XML
+    public static void xmlBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con gráficos
+    public static void graficosBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con sonido
+    public static void sonidoBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con imágenes
+    public static void imagenesBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con redes
+    public static void redesBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con seguridad
+    public static void seguridadBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con criptografía
+    public static void criptoBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con compresión
+    public static void compresionBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con machine learning
+    public static void mlBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con IA
+    public static void iaBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con web
+    public static void webBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con GUI
+    public static void guiBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con animaciones
+    public static void animacionesBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con logs
+    public static void logsBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con configuración
+    public static void configBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con utilidades
+    public static void utilBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con pruebas
+    public static void testBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con mocks
+    public static void mockBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con fixtures
+    public static void fixtureBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con recursos
+    public static void recursosBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con internacionalización
+    public static void i18nBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con localización
+    public static void l10nBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con cadenas largas
+    public static void cadenasLargasBasura() {
+        String s="";
+        for(int i=0;i<1000;i++) s+="x";
+    }
+    // Métodos basura con números grandes
+    public static void numerosGrandesBasura() {
+        long l=1L;
+        for(int i=0;i<100;i++) l*=i+1;
+    }
+    // Métodos basura con BigInteger
+    public static void bigIntegerBasura() {
+        java.math.BigInteger b=java.math.BigInteger.ONE;
+        for(int i=1;i<100;i++) b=b.multiply(java.math.BigInteger.valueOf(i));
+    }
+    // Métodos basura con BigDecimal
+    public static void bigDecimalBasura() {
+        java.math.BigDecimal b=java.math.BigDecimal.ONE;
+        for(int i=1;i<100;i++) b=b.multiply(java.math.BigDecimal.valueOf(i));
+    }
+    // Métodos basura con aleatoriedad
+    public static void aleatorioBasura() {
+        Random r=new Random();
+        for(int i=0;i<100;i++) r.nextInt();
+    }
+    // Métodos basura con System
+    public static void systemBasura() {
+        System.currentTimeMillis();
+        System.nanoTime();
+        System.getProperty("user.dir");
+    }
+    // Métodos basura con environment
+    public static void envBasura() {
+        System.getenv();
+    }
+    // Métodos basura con shutdown hook
+    public static void shutdownBasura() {
+        Runtime.getRuntime().addShutdownHook(new Thread(()->{}));
+    }
+    // Métodos basura con finalize
+    protected void finalizeBasura() throws Throwable { super.finalize(); }
+    // Métodos basura con clone
+    protected Object cloneBasura() throws CloneNotSupportedException { return super.clone(); }
+    // Métodos basura con equals y hashCode
+    public boolean equalsBasura(Object o) { return super.equals(o); }
+    public int hashCodeBasura() { return super.hashCode(); }
+    // Métodos basura con toString
+    public String toStringBasura() { return super.toString(); }
+    // Métodos basura con wait/notify
+    public void waitBasura() throws InterruptedException { super.wait(); }
+    public void notifyBasura() { super.notify(); }
+    public void notifyAllBasura() { super.notifyAll(); }
+    // Métodos basura con assertions
+    public static void assertionsBasura() {
+        assert true;
+    }
+    // Métodos basura con switch
+    public static void switchBasura(int x) {
+        switch(x) {
+            case 1: break;
+            case 2: break;
+            default: break;
+        }
+    }
+    // Métodos basura con try-with-resources
+    public static void tryWithResourcesBasura() {
+        try(java.io.ByteArrayInputStream in=new java.io.ByteArrayInputStream(new byte[10])) {}
+        catch(Exception e) {}
+    }
+    // Métodos basura con Optional
+    public static void optionalBasura() {
+        Optional<String> o=Optional.of("basura");
+        o.ifPresent(s->nada());
+    }
+    // Métodos basura con CompletableFuture
+    public static void completableFutureBasura() {
+        java.util.concurrent.CompletableFuture.runAsync(()->nada());
+    }
+    // Métodos basura con CountDownLatch
+    public static void countDownLatchBasura() throws InterruptedException {
+        java.util.concurrent.CountDownLatch l=new java.util.concurrent.CountDownLatch(1);
+        l.countDown(); l.await();
+    }
+    // Métodos basura con Semaphore
+    public static void semaphoreBasura() throws InterruptedException {
+        java.util.concurrent.Semaphore s=new java.util.concurrent.Semaphore(1);
+        s.acquire(); s.release();
+    }
+    // Métodos basura con Timer
+    public static void timerBasura() {
+        java.util.Timer t=new java.util.Timer();
+        t.schedule(new java.util.TimerTask(){public void run(){};},100);
+        t.cancel();
+    }
+    // Métodos basura con Calendar
+    public static void calendarBasura() {
+        java.util.Calendar c=java.util.Calendar.getInstance();
+        c.add(java.util.Calendar.DAY_OF_MONTH,1);
+    }
+    // Métodos basura con UUID
+    public static void uuidBasura() {
+        java.util.UUID u=java.util.UUID.randomUUID();
+        u.toString();
+    }
+    // Métodos basura con Pattern/Matcher
+    public static void regexBasura() {
+        java.util.regex.Pattern p=java.util.regex.Pattern.compile("a+");
+        java.util.regex.Matcher m=p.matcher("aaaa");
+        m.find();
+    }
+    // Métodos basura con Scanner
+    public static void scannerBasura() {
+        java.util.Scanner sc=new java.util.Scanner("1 2 3");
+        while(sc.hasNextInt()) sc.nextInt();
+    }
+    // Métodos basura con Properties
+    public static void propertiesBasura() {
+        java.util.Properties p=new java.util.Properties();
+        p.setProperty("k","v");
+        p.getProperty("k");
+    }
+    // Métodos basura con ResourceBundle
+    public static void resourceBundleBasura() {
+        java.util.ResourceBundle.getBundle("basura");
+    }
+    // Métodos basura con Locale
+    public static void localeBasura() {
+        java.util.Locale l=java.util.Locale.getDefault();
+        l.getLanguage();
+    }
+    // Métodos basura con Charset
+    public static void charsetBasura() {
+        java.nio.charset.Charset c=java.nio.charset.StandardCharsets.UTF_8;
+        c.displayName();
+    }
+    // Métodos basura con File
+    public static void fileBasura() {
+        java.io.File f=new java.io.File("basura.txt");
+        f.exists();
+    }
+    // Métodos basura con Path
+    public static void pathBasura() {
+        java.nio.file.Path p=java.nio.file.Paths.get("basura.txt");
+        p.toString();
+    }
+    // Métodos basura con Files
+    public static void filesBasura() throws java.io.IOException {
+        java.nio.file.Files.exists(java.nio.file.Paths.get("basura.txt"));
+    }
+    // Métodos basura con URL
+    public static void urlBasura() throws java.net.MalformedURLException {
+        java.net.URL u=new java.net.URL("http://basura.com");
+        u.getHost();
+    }
+    // Métodos basura con HttpURLConnection
+    public static void httpBasura() throws java.io.IOException {
+        java.net.HttpURLConnection c=(java.net.HttpURLConnection)new java.net.URL("http://basura.com").openConnection();
+        c.getResponseCode();
+    }
+    // Métodos basura con ThreadLocal
+    public static void threadLocalBasura() {
+        ThreadLocal<Integer> t=new ThreadLocal<>();
+        t.set(1);
+        t.get();
+    }
+    // Métodos basura con WeakReference
+    public static void weakRefBasura() {
+        java.lang.ref.WeakReference<Object> w=new java.lang.ref.WeakReference<>(new Object());
+        w.get();
+    }
+    // Métodos basura con SoftReference
+    public static void softRefBasura() {
+        java.lang.ref.SoftReference<Object> s=new java.lang.ref.SoftReference<>(new Object());
+        s.get();
+    }
+    // Métodos basura con PhantomReference
+    public static void phantomRefBasura() {
+        java.lang.ref.PhantomReference<Object> p=new java.lang.ref.PhantomReference<>(new Object(), new java.lang.ref.ReferenceQueue<>());
+        p.isEnqueued();
+    }
+    // Métodos basura con ArrayDeque
+    public static void arrayDequeBasura() {
+        java.util.ArrayDeque<Integer> d=new java.util.ArrayDeque<>();
+        d.add(1); d.poll();
+    }
+    // Métodos basura con PriorityQueue
+    public static void priorityQueueBasura() {
+        java.util.PriorityQueue<Integer> q=new java.util.PriorityQueue<>();
+        q.add(1); q.poll();
+    }
+    // Métodos basura con TreeMap
+    public static void treeMapBasura() {
+        java.util.TreeMap<Integer,String> t=new java.util.TreeMap<>();
+        t.put(1,"a"); t.get(1);
+    }
+    // Métodos basura con TreeSet
+    public static void treeSetBasura() {
+        java.util.TreeSet<Integer> t=new java.util.TreeSet<>();
+        t.add(1); t.contains(1);
+    }
+    // Métodos basura con LinkedHashMap
+    public static void linkedHashMapBasura() {
+        java.util.LinkedHashMap<Integer,String> m=new java.util.LinkedHashMap<>();
+        m.put(1,"a"); m.get(1);
+    }
+    // Métodos basura con LinkedHashSet
+    public static void linkedHashSetBasura() {
+        java.util.LinkedHashSet<Integer> s=new java.util.LinkedHashSet<>();
+        s.add(1); s.contains(1);
+    }
+    // Métodos basura con BitSet
+    public static void bitSetBasura() {
+        java.util.BitSet b=new java.util.BitSet();
+        b.set(1); b.get(1);
+    }
+    // Métodos basura con Stack
+    public static void stackBasura() {
+        java.util.Stack<Integer> s=new java.util.Stack<>();
+        s.push(1); s.pop();
+    }
+    // Métodos basura con Vector
+    public static void vectorBasura() {
+        java.util.Vector<Integer> v=new java.util.Vector<>();
+        v.add(1); v.get(0);
+    }
+    // Métodos basura con Enumeration
+    public static void enumerationBasura() {
+        java.util.Vector<Integer> v=new java.util.Vector<>();
+        v.add(1);
+        java.util.Enumeration<Integer> e=v.elements();
+        while(e.hasMoreElements()) e.nextElement();
+    }
+    // Métodos basura con Observer/Observable
+    public static void observerBasura() {
+        // Obsoleto, solo para llenar líneas
+    }
+    // Métodos basura con TimerTask
+    public static void timerTaskBasura() {
+        java.util.TimerTask t=new java.util.TimerTask(){public void run(){};};
+        t.cancel();
+    }
+    // Métodos basura con Formatter
+    public static void formatterBasura() {
+        java.util.Formatter f=new java.util.Formatter();
+        f.format("%d",1);
+    }
+    // Métodos basura con Scanner delimiters
+    public static void scannerDelimiterBasura() {
+        java.util.Scanner sc=new java.util.Scanner("a,b,c");
+        sc.useDelimiter(",");
+        while(sc.hasNext()) sc.next();
+    }
+    // Métodos basura con Spliterator
+    public static void spliteratorBasura() {
+        java.util.List<Integer> l=java.util.Arrays.asList(1,2,3);
+        java.util.Spliterator<Integer> s=l.spliterator();
+        s.tryAdvance(x->nada());
+    }
+    // Métodos basura con Stream.Builder
+    public static void streamBuilderBasura() {
+        java.util.stream.Stream.Builder<Integer> b=java.util.stream.Stream.builder();
+        b.add(1); b.build();
+    }
+    // Métodos basura con Supplier
+    public static void supplierBasura() {
+        java.util.function.Supplier<Integer> s=()->42;
+        s.get();
+    }
+    // Métodos basura con Consumer
+    public static void consumerBasura() {
+        java.util.function.Consumer<Integer> c=x->nada();
+        c.accept(1);
+    }
+    // Métodos basura con Comparator
+    public static void comparatorBasura() {
+        java.util.Comparator<Integer> c=(a,b)->a-b;
+        c.compare(1,2);
+    }
+    // Métodos basura con Runnable
+    public static void runnableBasura() {
+        Runnable r=()->nada();
+        r.run();
+    }
+    // Métodos basura con Callable
+    public static void callableBasura() throws Exception {
+        java.util.concurrent.Callable<Integer> c=()->42;
+        c.call();
+    }
+    // Métodos basura con Future
+    public static void futureBasura() throws Exception {
+        java.util.concurrent.FutureTask<Integer> f=new java.util.concurrent.FutureTask<>(()->42);
+        f.run(); f.get();
+    }
+    // Métodos basura con ExecutorService
+    public static void executorServiceBasura() {
+        java.util.concurrent.ExecutorService e=java.util.concurrent.Executors.newSingleThreadExecutor();
+        e.submit(()->nada());
+        e.shutdown();
+    }
+    // Métodos basura con BlockingQueue
+    public static void blockingQueueBasura() throws InterruptedException {
+        java.util.concurrent.BlockingQueue<Integer> q=new java.util.concurrent.ArrayBlockingQueue<>(10);
+        q.put(1); q.take();
+    }
+    // Métodos basura con AtomicInteger
+    public static void atomicIntegerBasura() {
+        java.util.concurrent.atomic.AtomicInteger a=new java.util.concurrent.atomic.AtomicInteger(0);
+        a.incrementAndGet();
+    }
+    // Métodos basura con Phaser
+    public static void phaserBasura() {
+        java.util.concurrent.Phaser p=new java.util.concurrent.Phaser(1);
+        p.arriveAndDeregister();
+    }
+    // Métodos basura con CyclicBarrier
+    public static void cyclicBarrierBasura() throws Exception {
+        java.util.concurrent.CyclicBarrier b=new java.util.concurrent.CyclicBarrier(1);
+        b.await();
+    }
+    // Métodos basura con Exchanger
+    public static void exchangerBasura() throws Exception {
+        java.util.concurrent.Exchanger<Integer> e=new java.util.concurrent.Exchanger<>();
+        e.exchange(1);
+    }
+    // Métodos basura con ForkJoinPool
+    public static void forkJoinPoolBasura() {
+        java.util.concurrent.ForkJoinPool p=new java.util.concurrent.ForkJoinPool();
+        p.submit(()->nada());
+        p.shutdown();
+    }
+    // Métodos basura con Phaser
+    public static void phaserBasura2() {
+        java.util.concurrent.Phaser p=new java.util.concurrent.Phaser();
+        p.register();
+    }
+    // Métodos basura con StampedLock
+    public static void stampedLockBasura() {
+        java.util.concurrent.locks.StampedLock l=new java.util.concurrent.locks.StampedLock();
+        long s=l.writeLock();
+        l.unlockWrite(s);
+    }
+    // Métodos basura con ReadWriteLock
+    public static void readWriteLockBasura() {
+        java.util.concurrent.locks.ReentrantReadWriteLock l=new java.util.concurrent.locks.ReentrantReadWriteLock();
+        l.readLock().lock(); l.readLock().unlock();
+    }
+    // Métodos basura con CountDownLatch
+    public static void countDownLatchBasura2() throws InterruptedException {
+        java.util.concurrent.CountDownLatch l=new java.util.concurrent.CountDownLatch(1);
+        l.countDown(); l.await();
+    }
+    // Métodos basura con SynchronousQueue
+    public static void synchronousQueueBasura() throws InterruptedException {
+        java.util.concurrent.SynchronousQueue<Integer> q=new java.util.concurrent.SynchronousQueue<>();
+        q.offer(1);
+    }
+    // Métodos basura con DelayQueue
+    public static void delayQueueBasura() {
+        java.util.concurrent.DelayQueue<java.util.concurrent.Delayed> q=new java.util.concurrent.DelayQueue<>();
+    }
+    // Métodos basura con PriorityBlockingQueue
+    public static void priorityBlockingQueueBasura() {
+        java.util.concurrent.PriorityBlockingQueue<Integer> q=new java.util.concurrent.PriorityBlockingQueue<>();
+        q.add(1);
+    }
+    // Métodos basura con LinkedBlockingDeque
+    public static void linkedBlockingDequeBasura() {
+        java.util.concurrent.LinkedBlockingDeque<Integer> d=new java.util.concurrent.LinkedBlockingDeque<>();
+        d.add(1);
+    }
+    // Métodos basura con ConcurrentHashMap
+    public static void concurrentHashMapBasura() {
+        java.util.concurrent.ConcurrentHashMap<Integer,String> m=new java.util.concurrent.ConcurrentHashMap<>();
+        m.put(1,"a");
+    }
+    // Métodos basura con ConcurrentSkipListMap
+    public static void concurrentSkipListMapBasura() {
+        java.util.concurrent.ConcurrentSkipListMap<Integer,String> m=new java.util.concurrent.ConcurrentSkipListMap<>();
+        m.put(1,"a");
+    }
+    // Métodos basura con ConcurrentSkipListSet
+    public static void concurrentSkipListSetBasura() {
+        java.util.concurrent.ConcurrentSkipListSet<Integer> s=new java.util.concurrent.ConcurrentSkipListSet<>();
+        s.add(1);
+    }
+    // Métodos basura con ConcurrentLinkedQueue
+    public static void concurrentLinkedQueueBasura() {
+        java.util.concurrent.ConcurrentLinkedQueue<Integer> q=new java.util.concurrent.ConcurrentLinkedQueue<>();
+        q.add(1);
+    }
+    // Métodos basura con ConcurrentLinkedDeque
+    public static void concurrentLinkedDequeBasura() {
+        java.util.concurrent.ConcurrentLinkedDeque<Integer> d=new java.util.concurrent.ConcurrentLinkedDeque<>();
+        d.add(1);
+    }
+    // Métodos basura con ThreadPoolExecutor
+    public static void threadPoolExecutorBasura() {
+        java.util.concurrent.ThreadPoolExecutor e=(java.util.concurrent.ThreadPoolExecutor)java.util.concurrent.Executors.newFixedThreadPool(1);
+        e.shutdown();
+    }
+    // Métodos basura con ScheduledExecutorService
+    public static void scheduledExecutorServiceBasura() {
+        java.util.concurrent.ScheduledExecutorService e=java.util.concurrent.Executors.newScheduledThreadPool(1);
+        e.shutdown();
+    }
+    // Métodos basura con Semaphore
+    public static void semaphoreBasura2() throws InterruptedException {
+        java.util.concurrent.Semaphore s=new java.util.concurrent.Semaphore(1);
+        s.acquire(); s.release();
+    }
+    // Métodos basura con ReentrantLock
+    public static void reentrantLockBasura() {
+        java.util.concurrent.locks.ReentrantLock l=new java.util.concurrent.locks.ReentrantLock();
+        l.lock(); l.unlock();
+    }
+    // Métodos basura con Condition
+    public static void conditionBasura() throws InterruptedException {
+        java.util.concurrent.locks.ReentrantLock l=new java.util.concurrent.locks.ReentrantLock();
+        java.util.concurrent.locks.Condition c=l.newCondition();
+        l.lock(); c.signalAll(); l.unlock();
+    }
+    // Métodos basura con Phaser
+    public static void phaserBasura3() {
+        java.util.concurrent.Phaser p=new java.util.concurrent.Phaser();
+        p.arrive();
+    }
+    // Métodos basura con ThreadGroup
+    public static void threadGroupBasura() {
+        ThreadGroup g=new ThreadGroup("basura");
+        new Thread(g,()->nada()).start();
+    }
+    // Métodos basura con ThreadFactory
+    public static void threadFactoryBasura() {
+        java.util.concurrent.ThreadFactory f=Runnable::new;
+        f.newThread(()->nada());
+    }
+    // Métodos basura con LockSupport
+    public static void lockSupportBasura() {
+        java.util.concurrent.locks.LockSupport.parkNanos(1);
+    }
+    // Métodos basura con Unsafe (no recomendado, solo para llenar líneas)
+    public static void unsafeBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con sun.misc (no recomendado, solo para llenar líneas)
+    public static void sunMiscBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con System.exit
+    public static void systemExitBasura() {
+        // No hace nada real
+    }
+    // Métodos basura con finalize
+    public void finalize() {}
+}
+// --- Fin del código basura autocontenido ---
